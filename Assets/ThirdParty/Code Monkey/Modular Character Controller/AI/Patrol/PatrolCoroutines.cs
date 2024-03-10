@@ -40,11 +40,38 @@ public class PatrolCoroutines : MonoBehaviour
         yield return new WaitForSeconds(_waitTime);
         Flip();
         anim.SetBool("Idle", false);
-        anim.SetBool("Attack", false);
         _currentWaypointIndex = (_currentWaypointIndex + 1) % waypoints.Length;
 
         StopCoroutine(_prevCoroutine);
         _prevCoroutine = StartCoroutine(_MovingToNextWaypoint());
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            Interupt();
+            Flip();
+            anim.SetBool("Idle", false);
+            _currentWaypointIndex = (_currentWaypointIndex + 1) % waypoints.Length;
+            Continue();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            anim.SetBool("Attack", true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            anim.SetBool("Attack", false);
+        }
     }
 
     private void Flip()
