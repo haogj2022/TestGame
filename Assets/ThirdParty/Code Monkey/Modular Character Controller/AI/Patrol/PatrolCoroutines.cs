@@ -61,5 +61,13 @@ public class PatrolCoroutines : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
     }
+    public void Interupt()
+    {
+        StopCoroutine(_prevCoroutine);
+    }
 
+    public void Continue()
+    {
+        _prevCoroutine = StartCoroutine(_MovingToNextWaypoint());
+    }
 }
