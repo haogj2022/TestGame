@@ -4,7 +4,6 @@ using UnityEngine;
 public class LedgeClimb : MonoBehaviour
 {
     private float horizontalFloat;
-    private float verticalFloat;
     private Animator anim;
 
     private void Awake()
@@ -15,7 +14,6 @@ public class LedgeClimb : MonoBehaviour
     private void FixedUpdate()
     {
         horizontalFloat = Input.GetAxis("Horizontal");
-        verticalFloat = Input.GetAxis("Vertical");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -25,19 +23,21 @@ public class LedgeClimb : MonoBehaviour
             Physics2D.gravity = new Vector2(0f, 9.81f);
             transform.rotation = Quaternion.Euler(180f, 0f, 0f);
             StartCoroutine(FallOffLedge());
-        }
+        }        
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "LedgeLeft")
         {
+            anim.SetBool("Dash", false);
             Physics2D.gravity = new Vector2(-9.81f, 0f);
             transform.rotation = Quaternion.Euler(180f, 0f, -90f);
         }
 
         if (collision.gameObject.tag == "LedgeRight")
         {
+            anim.SetBool("Dash", false);
             Physics2D.gravity = new Vector2(9.81f, 0f);
             transform.rotation = Quaternion.Euler(180f, 180f, -90f);
         }      
@@ -52,14 +52,7 @@ public class LedgeClimb : MonoBehaviour
             if (horizontalFloat < 0f)
             {
                 transform.rotation = Quaternion.Euler(180f, 180f, 0f);
-            }    
-            
-            if (verticalFloat < 0f)
-            {
-                Physics2D.gravity = new Vector2(0f, -9.81f);
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-                StopAllCoroutines();
-            }
+            }               
         }
     }
 
@@ -82,23 +75,13 @@ public class LedgeClimb : MonoBehaviour
         if (collision.gameObject.tag == "LedgeLeft")
         {
             Physics2D.gravity = new Vector2(0f, -9.81f);
-            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-
-            if (anim.GetBool("Dash"))
-            {
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            }
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
         if (collision.gameObject.tag == "LedgeRight")
         {
             Physics2D.gravity = new Vector2(0f, -9.81f);
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-
-            if (anim.GetBool("Dash"))
-            {
-                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-            }
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }        
     }
 }

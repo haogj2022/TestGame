@@ -9,6 +9,8 @@ public class Crouch : MonoBehaviour
     private Transform groundCheckDown;
     private Animator anim;
 
+    private bool canCrouch = true;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -21,18 +23,34 @@ public class Crouch : MonoBehaviour
         groundCheckDown.position = new Vector2(transform.position.x, transform.position.y - 0.25f);
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "LedgeUp")
+        {
+            canCrouch = false;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "LedgeUp")
+        {
+            canCrouch = true;
+        }
+    }
+
     private void Update()
     {
         if (!anim.GetBool("Fly") && !anim.GetBool("Tunnel"))
         {
-            if (Input.GetKeyDown(KeyCode.S) && IsGroundedDown() || Input.GetKeyDown(KeyCode.DownArrow) && IsGroundedDown())
+            if (Input.GetKeyDown(KeyCode.S) && IsGroundedDown() && canCrouch || Input.GetKeyDown(KeyCode.DownArrow) && IsGroundedDown() && canCrouch)
             {
                 anim.SetBool("Crouch", true);
-                boxCollider2D.offset = new Vector2(0f, -0.13f);
+                boxCollider2D.offset = new Vector2(0f, -0.125f);
                 boxCollider2D.size = new Vector2(0.5f, 0.25f);                
             }
 
-            if (Input.GetKeyDown(KeyCode.W) && !IsGroundedUp() || Input.GetKeyDown(KeyCode.UpArrow) && !IsGroundedUp() || Input.GetButton("Jump") || !IsGroundedDown())
+            if (Input.GetKeyDown(KeyCode.W) && !IsGroundedUp() || Input.GetKeyDown(KeyCode.UpArrow) && !IsGroundedUp() || !IsGroundedDown())
             {
                 anim.SetBool("Crouch", false);
                 boxCollider2D.offset = Vector2.zero;

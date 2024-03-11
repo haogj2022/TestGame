@@ -12,27 +12,29 @@ public class EnemyController : MonoBehaviour
         player = GameManager.Instance.playerController;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            anim.SetBool("Attack", true);
+            canAttack = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            anim.SetBool("Attack", false);
+            canAttack = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Obstacle")
         {
             gameObject.SetActive(false);
-        }
-
-        if (collision.gameObject.tag == "Player")
-        {
-            anim.SetBool("Attack", true);
-            canAttack = true;
-
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            anim.SetBool("Attack", false);
-            canAttack = false;
         }
     }
 

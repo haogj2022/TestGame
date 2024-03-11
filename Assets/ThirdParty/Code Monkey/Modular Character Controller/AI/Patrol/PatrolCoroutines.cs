@@ -17,7 +17,7 @@ public class PatrolCoroutines : MonoBehaviour
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -50,27 +50,11 @@ public class PatrolCoroutines : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Interupt();
+            StopAllCoroutines();
             Flip();
             anim.SetBool("Idle", false);
             _currentWaypointIndex = (_currentWaypointIndex + 1) % waypoints.Length;
             Continue();
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            anim.SetBool("Attack", true);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            anim.SetBool("Attack", false);
         }
     }
 

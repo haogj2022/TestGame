@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2506119838167396718}
   - component: {fileID: 7650966894804354629}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LedgeUp
   m_TagString: LedgeUp
   m_Icon: {fileID: 0}

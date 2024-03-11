@@ -16,6 +16,8 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
     private TrailRenderer tr;
     private Animator anim;
 
+    private bool wallDash;
+
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -23,9 +25,35 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "No Dash")
+        {
+            canDash = false;
+        }
+
+        if (collision.tag == "Wall Dash")
+        {
+            wallDash = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "No Dash")
+        {
+            canDash = true;
+        }
+
+        if (collision.tag == "Wall Dash")
+        {
+            wallDash = false;
+        }
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash || Input.GetKeyDown(KeyCode.RightShift) && canDash)
+        if (Input.GetKeyDown(KeyCode.Q) && canDash)
         {
             if (!anim.GetBool("Tunnel") && !anim.GetBool("Fly") && !anim.GetBool("Crouch"))
             {
@@ -86,7 +114,12 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0f, 180f, 45f);
             }            
         }
-        
+
+        if (wallDash)
+        {
+            anim.SetBool("Dash", false);
+        }
+
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         anim.SetBool("Dash", false);

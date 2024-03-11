@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityBar: {fileID: 0}
+  tunnelControl: {fileID: 0}
   gotKey: 0
 --- !u!114 &2184095517407131151
 MonoBehaviour:
@@ -317,6 +318,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  boxCollider2D: {fileID: 5262561988911930959}
 --- !u!114 &6589582731045651735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +344,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1111177665584363327
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
     private float fallMultiplier = 2.5f;
     private float lowJumpMultiplier = 2f;
 
-    private float coyoteTime = 0.2f;
+    private float coyoteTime = 0.5f;
     private float coyoteTimeCounter;
     private float jumpBufferTime = 0.2f;
     private float jumpBufferTimeCounter;
@@ -31,7 +31,7 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
     {
         anim.SetBool("Jump", false);        
 
-        if (!anim.GetBool("Tunnel"))
+        if (!anim.GetBool("Tunnel") && !anim.GetBool("Crouch"))
         {
             if (IsGrounded())
             {
@@ -57,7 +57,7 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
                 canDoubleJump = false;
             }
 
-            if (jumpBufferTimeCounter > 0f && coyoteTimeCounter > 0f || jumpBufferTimeCounter > 0f && canDoubleJump)
+            if (Input.GetButtonDown("Jump") && coyoteTimeCounter > 0f || jumpBufferTimeCounter > 0f && canDoubleJump)
             {
                 anim.SetBool("Jump", true);
                 rb2D.velocity = Vector2.up * (canDoubleJump ? doubleJumpPower : jumpPower);
@@ -74,6 +74,11 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
                 rb2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1f) * Time.deltaTime;
 
                 coyoteTimeCounter = 0f;
+            }
+
+            if (rb2D.velocity.y < -10f)
+            {
+                rb2D.velocity = new Vector2(rb2D.velocity.x, -10f);
             }
         }        
     }
