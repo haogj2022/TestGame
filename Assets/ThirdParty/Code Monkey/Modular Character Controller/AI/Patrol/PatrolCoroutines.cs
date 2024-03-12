@@ -50,12 +50,18 @@ public class PatrolCoroutines : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            StopAllCoroutines();
-            Flip();
-            anim.SetBool("Idle", false);
-            _currentWaypointIndex = (_currentWaypointIndex + 1) % waypoints.Length;
-            Continue();
+            StartCoroutine(DetectCooldown());
         }
+    }
+
+    IEnumerator DetectCooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        StopAllCoroutines();
+        Flip();
+        anim.SetBool("Idle", false);
+        _currentWaypointIndex = (_currentWaypointIndex + 1) % waypoints.Length;
+        Continue();
     }
 
     private void Flip()

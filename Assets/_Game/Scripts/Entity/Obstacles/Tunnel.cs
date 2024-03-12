@@ -14,7 +14,7 @@ public class Tunnel : MonoBehaviour
     private Rigidbody2D rb2D;
     private BoxCollider2D boxCollider2D;
     private Animator anim;
-    private Rigidbody2DFly rb2DFly;
+    private Rigidbody2DFlyAndSwim rb2DFly;
     private PlayerController playerController;
 
     private Light2D cameraLight;
@@ -25,7 +25,7 @@ public class Tunnel : MonoBehaviour
         rb2D = player.GetComponent<Rigidbody2D>();
         boxCollider2D = player.GetComponent<BoxCollider2D>();
         anim = player.GetComponent<Animator>();
-        rb2DFly = player.GetComponent<Rigidbody2DFly>();
+        rb2DFly = player.GetComponent<Rigidbody2DFlyAndSwim>();
         playerController = player.GetComponent<PlayerController>();
 
         cameraLight = GameObject.FindGameObjectWithTag("CameraLight").GetComponent<Light2D>();
@@ -114,29 +114,44 @@ public class Tunnel : MonoBehaviour
             anim.SetFloat("Velocity", 0f);
             rb2D.velocity = new Vector2(horizontalFloat * moveSpeed, verticalFloat * moveSpeed);
 
-            if (horizontalFloat > 0f)
-            {
-                anim.SetFloat("Velocity", 1f);
-                player.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-            }
-
-            if (horizontalFloat < 0f)
-            {
-                anim.SetFloat("Velocity", 1f);
-                player.transform.rotation = Quaternion.Euler(0f, 0f, -90f);
-            }
-
-            if (verticalFloat > 0f)
-            {
-                anim.SetFloat("Velocity", 1f);
-                player.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-            }
-
-            if (verticalFloat < 0f)
-            {
-                anim.SetFloat("Velocity", 1f);
-                player.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            }
+            TunnelDIrection();
         }
     }  
+
+    private void TunnelDIrection()
+    {
+        TunnelHorizontal();
+        TunnelVertical();
+    }
+
+    private void TunnelHorizontal()
+    {
+
+        if (horizontalFloat > 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            player.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+        }
+
+        if (horizontalFloat < 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            player.transform.rotation = Quaternion.Euler(0f, 0f, -90f);
+        }
+    }
+
+    private void TunnelVertical()
+    {
+        if (verticalFloat > 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            player.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+        }
+
+        if (verticalFloat < 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            player.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+    }
 }

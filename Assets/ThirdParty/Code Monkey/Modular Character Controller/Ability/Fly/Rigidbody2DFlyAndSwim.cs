@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Rigidbody2DFly : MonoBehaviour
+public class Rigidbody2DFlyAndSwim : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private GameObject smokeEffect;
@@ -28,7 +28,7 @@ public class Rigidbody2DFly : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Water")
         {
@@ -76,32 +76,74 @@ public class Rigidbody2DFly : MonoBehaviour
     {
         if (anim.GetBool("Swim"))
         {
-            anim.SetFloat("Swim Velocity", 0f);
+            anim.SetFloat("Velocity", 0f);
             rb2D.velocity = new Vector2(horizontalFloat * moveSpeed / 2, verticalFloat * moveSpeed / 2);
 
-            if (horizontalFloat > 0f)
-            {
-                anim.SetFloat("Swim Velocity", 1f);
-                transform.rotation = Quaternion.Euler(0f, 0f, -90f);
-            }
+            SwimDirection();           
+        }
+    }
 
-            if (horizontalFloat < 0f)
-            {
-                anim.SetFloat("Swim Velocity", 1f);
-                transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-            }
+    private void SwimDirection()
+    {
+        SwimHorizontally();
+        SwimVertically();
+        SwimDiagonally();
+    }
 
-            if (verticalFloat > 0f)
-            {
-                anim.SetFloat("Swim Velocity", 1f);
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            }
+    private void SwimHorizontally()
+    {
+        if (horizontalFloat > 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            transform.rotation = Quaternion.Euler(0f, 0f, -90f);
+        }
 
-            if (verticalFloat < 0f)
-            {
-                anim.SetFloat("Swim Velocity", 1f);
-                transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-            }
+        if (horizontalFloat < 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+        }
+    }
+
+    private void SwimVertically()
+    {
+        if (verticalFloat > 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+
+        if (verticalFloat < 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+        }
+    }
+
+    private void SwimDiagonally()
+    {
+        if (verticalFloat > 0f && horizontalFloat > 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            transform.rotation = Quaternion.Euler(0f, 0f, -45f);
+        }
+
+        if (verticalFloat < 0f && horizontalFloat > 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            transform.rotation = Quaternion.Euler(0f, 0f, 225f);
+        }
+
+        if (verticalFloat > 0f && horizontalFloat < 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            transform.rotation = Quaternion.Euler(0f, 0f, 45f);
+        }
+
+        if (verticalFloat < 0f && horizontalFloat < 0f)
+        {
+            anim.SetFloat("Velocity", 1f);
+            transform.rotation = Quaternion.Euler(0f, 0f, 135f);
         }
     }
 }
