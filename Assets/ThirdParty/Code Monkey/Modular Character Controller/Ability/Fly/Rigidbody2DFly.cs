@@ -28,6 +28,22 @@ public class Rigidbody2DFly : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Water")
+        {
+            anim.SetBool("Swim", true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Water")
+        {            
+            anim.SetBool("Swim", false);
+        }
+    }
+
     IEnumerator FlyAbility()
     {
         StartCoroutine(TransformEffect());
@@ -53,6 +69,39 @@ public class Rigidbody2DFly : MonoBehaviour
         if (anim.GetBool("Fly"))
         {
             rb2D.velocity = new Vector2(horizontalFloat * moveSpeed, verticalFloat * moveSpeed);
-        }        
+        }         
+    }
+
+    private void FixedUpdate()
+    {
+        if (anim.GetBool("Swim"))
+        {
+            anim.SetFloat("Swim Velocity", 0f);
+            rb2D.velocity = new Vector2(horizontalFloat * moveSpeed / 2, verticalFloat * moveSpeed / 2);
+
+            if (horizontalFloat > 0f)
+            {
+                anim.SetFloat("Swim Velocity", 1f);
+                transform.rotation = Quaternion.Euler(0f, 0f, -90f);
+            }
+
+            if (horizontalFloat < 0f)
+            {
+                anim.SetFloat("Swim Velocity", 1f);
+                transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+            }
+
+            if (verticalFloat > 0f)
+            {
+                anim.SetFloat("Swim Velocity", 1f);
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
+
+            if (verticalFloat < 0f)
+            {
+                anim.SetFloat("Swim Velocity", 1f);
+                transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+            }
+        }
     }
 }
