@@ -8,7 +8,7 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
     private float horizontalFloat;
     private Rigidbody2D rb2D;
 
-    private bool canDash = true;
+    [HideInInspector] public bool canDash = true;
     private bool isDashing;
     private float dashingPower = 10f;
     private float dashingTime = 0.3f;
@@ -68,6 +68,15 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
         }
     }
 
+    public void Dead()
+    {
+        anim.SetBool("Dash", false);
+        tr.emitting = false;
+        rb2D.gravityScale = 1f;
+        isDashing = false;
+        canDash = true;
+    }
+
     private void FixedUpdate()
     {
         Flip();          
@@ -75,18 +84,18 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
 
     private void Flip()
     {
-        if (horizontalFloat > 0)
+        if (horizontalFloat > 0f)
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
-        if (horizontalFloat < 0)
+        if (horizontalFloat < 0f)
         {
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
     }
 
-    private IEnumerator Dash()
+    public IEnumerator Dash()
     {
         anim.SetBool("Dash", true);
         canDash = false;

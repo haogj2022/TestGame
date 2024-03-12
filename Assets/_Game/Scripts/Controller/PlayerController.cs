@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] GameObject player;
     [SerializeField] GameObject abilityBar;
     [SerializeField] Animator tunnelControl;
     [HideInInspector] public bool gotKey;

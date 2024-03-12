@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
         transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10f);
     }
 }

@@ -5,7 +5,7 @@ public class PatrolCoroutines : MonoBehaviour
 {
     public Transform[] waypoints;
     private int _currentWaypointIndex = 0;
-    private float _speed = 2f;
+    [HideInInspector] public float _speed = 2f;
 
     private float _waitTime = 1f; // in seconds
 

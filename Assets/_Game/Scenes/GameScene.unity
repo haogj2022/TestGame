@@ -2591,7 +2591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2050bdcec328a4eb52ceb05a3321db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {x: 108.5, y: -10.75, z: 0}
+  playerRespawn: {x: 108.5, y: -10.5, z: 0}
 --- !u!66 &201622418
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -3024,7 +3024,7 @@ PrefabInstance:
     - target: {fileID: 306608892844764730, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
       propertyPath: nextLocation.y
-      value: -10.75
+      value: -10.5
       objectReference: {fileID: 0}
     - target: {fileID: 4066214890679781444, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
@@ -3237,7 +3237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2050bdcec328a4eb52ceb05a3321db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {x: 126.5, y: 0.25, z: 0}
+  playerRespawn: {x: 120.5, y: 0.5, z: 0}
 --- !u!66 &209982560
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -4445,7 +4445,7 @@ PrefabInstance:
     - target: {fileID: 4326126680350029686, guid: b5d17ba4aeb6c4743baf262563928513,
         type: 3}
       propertyPath: playerRespawn.y
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5076462708772027889, guid: b5d17ba4aeb6c4743baf262563928513,
         type: 3}
@@ -5094,7 +5094,7 @@ PrefabInstance:
     - target: {fileID: 7855962175455428807, guid: 6d4dc2a084b08ca4caaf641c9492b929,
         type: 3}
       propertyPath: playerRespawn.y
-      value: 1.25
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -5461,7 +5461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2050bdcec328a4eb52ceb05a3321db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {x: 79.5, y: -7.75, z: 0}
+  playerRespawn: {x: 79.5, y: -7.5, z: 0}
 --- !u!66 &352658939
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -8202,7 +8202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2050bdcec328a4eb52ceb05a3321db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {x: 57.5, y: -2.75, z: 0}
+  playerRespawn: {x: 57.5, y: -2.5, z: 0}
 --- !u!1 &423234870
 GameObject:
   m_ObjectHideFlags: 0
@@ -20256,12 +20256,12 @@ PrefabInstance:
     - target: {fileID: 4326126680350029686, guid: b5d17ba4aeb6c4743baf262563928513,
         type: 3}
       propertyPath: playerRespawn.x
-      value: 126.5
+      value: 120.5
       objectReference: {fileID: 0}
     - target: {fileID: 4326126680350029686, guid: b5d17ba4aeb6c4743baf262563928513,
         type: 3}
       propertyPath: playerRespawn.y
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5076462708772027889, guid: b5d17ba4aeb6c4743baf262563928513,
         type: 3}
@@ -20496,6 +20496,7 @@ MonoBehaviour:
   waypoints:
   - {fileID: 2113152076}
   - {fileID: 1628757030}
+  _speed: 2
 --- !u!1001 &693994339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20676,7 +20677,7 @@ PrefabInstance:
     - target: {fileID: 306608892844764730, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
       propertyPath: nextLocation.y
-      value: -10.75
+      value: -10.5
       objectReference: {fileID: 0}
     - target: {fileID: 4066214890679781444, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
@@ -21692,6 +21693,7 @@ MonoBehaviour:
   waypoints:
   - {fileID: 2057802091}
   - {fileID: 1713572169}
+  _speed: 2
 --- !u!1001 &771719390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23983,6 +23985,7 @@ MonoBehaviour:
   waypoints:
   - {fileID: 1290034322}
   - {fileID: 1794893520}
+  _speed: 2
 --- !u!1 &902843275
 GameObject:
   m_ObjectHideFlags: 0
@@ -24714,7 +24717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2050bdcec328a4eb52ceb05a3321db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {x: 29.5, y: -3.75, z: 0}
+  playerRespawn: {x: 29.5, y: -3.5, z: 0}
 --- !u!1001 &903531291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25108,6 +25111,7 @@ MonoBehaviour:
   waypoints:
   - {fileID: 1826426966}
   - {fileID: 1505202598}
+  _speed: 2
 --- !u!1 &942330852
 GameObject:
   m_ObjectHideFlags: 0
@@ -26614,6 +26618,7 @@ MonoBehaviour:
   waypoints:
   - {fileID: 1993009557}
   - {fileID: 478968560}
+  _speed: 2
 --- !u!1001 &1014976831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27622,6 +27627,7 @@ MonoBehaviour:
   waypoints:
   - {fileID: 1658083781}
   - {fileID: 408836249}
+  _speed: 2
 --- !u!1 &1063863663
 GameObject:
   m_ObjectHideFlags: 0
@@ -29145,7 +29151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2050bdcec328a4eb52ceb05a3321db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {x: -8.5, y: -2.75, z: 0}
+  playerRespawn: {x: -6.5, y: -2.5, z: 0}
 --- !u!1 &1125767809
 GameObject:
   m_ObjectHideFlags: 0
@@ -30994,7 +31000,7 @@ PrefabInstance:
     - target: {fileID: 306608892844764730, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
       propertyPath: nextLocation.y
-      value: -7.75
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 4066214890679781444, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
@@ -32397,7 +32403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2050bdcec328a4eb52ceb05a3321db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {x: 92.5, y: -10.75, z: 0}
+  playerRespawn: {x: 92.5, y: -10.5, z: 0}
 --- !u!66 &1330653518
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -33051,7 +33057,7 @@ PrefabInstance:
     - target: {fileID: 7855962175455428807, guid: 6d4dc2a084b08ca4caaf641c9492b929,
         type: 3}
       propertyPath: playerRespawn.y
-      value: -7.75
+      value: -7.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -40093,7 +40099,7 @@ PrefabInstance:
     - target: {fileID: 306608892844764730, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
       propertyPath: nextLocation.y
-      value: -10.75
+      value: -10.5
       objectReference: {fileID: 0}
     - target: {fileID: 4066214890679781444, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
@@ -40655,7 +40661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2050bdcec328a4eb52ceb05a3321db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {x: 60.5, y: 1.25, z: 0}
+  playerRespawn: {x: 60.5, y: 1.5, z: 0}
 --- !u!66 &1500160752
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -49167,7 +49173,7 @@ PrefabInstance:
     - target: {fileID: 306608892844764730, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
       propertyPath: nextLocation.y
-      value: -3.75
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4066214890679781444, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
@@ -49344,7 +49350,7 @@ PrefabInstance:
     - target: {fileID: 306608892844764730, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
       propertyPath: nextLocation.y
-      value: -2.75
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4066214890679781444, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
@@ -50002,7 +50008,7 @@ PrefabInstance:
     - target: {fileID: 7855962175455428807, guid: 6d4dc2a084b08ca4caaf641c9492b929,
         type: 3}
       propertyPath: playerRespawn.y
-      value: -7.75
+      value: -7.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -58260,7 +58266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2050bdcec328a4eb52ceb05a3321db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {x: 9.5, y: 2.75, z: 0}
+  playerRespawn: {x: 9.5, y: 2.5, z: 0}
 --- !u!1001 &1744620722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73871,7 +73877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2050bdcec328a4eb52ceb05a3321db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {x: 98.5, y: -0.75, z: 0}
+  playerRespawn: {x: 98.5, y: -0.5, z: 0}
 --- !u!66 &1911713782
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -95526,7 +95532,7 @@ PrefabInstance:
     - target: {fileID: 7855962175455428807, guid: 6d4dc2a084b08ca4caaf641c9492b929,
         type: 3}
       propertyPath: playerRespawn.y
-      value: -7.75
+      value: -7.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -96507,7 +96513,7 @@ PrefabInstance:
     - target: {fileID: 306608892844764730, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
       propertyPath: nextLocation.y
-      value: 2.75
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4066214890679781444, guid: d899509e47e952b478d69cbd7c38905a,
         type: 3}
