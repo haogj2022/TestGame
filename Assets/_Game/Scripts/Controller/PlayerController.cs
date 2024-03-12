@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject abilityBar;
     [SerializeField] Animator tunnelControl;
+    [SerializeField] Animator gemCollected;
     [HideInInspector] public bool gotKey;
     private Animator anim;
 
@@ -32,9 +33,16 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "Gem")
         {
-            Debug.Log("Gem collected!");
             collision.gameObject.SetActive(false);
+            StartCoroutine(GemCollected());
         }
+    }
+
+    IEnumerator GemCollected()
+    {
+        gemCollected.SetBool("Gem", true);
+        yield return new WaitForSeconds(2f);
+        gemCollected.SetBool("Gem", false);
     }
 
     private void OnCollisionExit2D(Collision2D collision)

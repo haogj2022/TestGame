@@ -21,7 +21,11 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            StartCoroutine(StopPatrol());
+            if (patrol != null)
+            {
+                StartCoroutine(StopPatrol());
+            }
+            
             anim.SetBool("Attack", true);
             canAttack = true;
         }
