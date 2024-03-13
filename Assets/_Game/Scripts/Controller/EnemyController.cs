@@ -5,6 +5,7 @@ public class EnemyController : MonoBehaviour
 {
     public Vector3 playerRespawn;
     [SerializeField] private Animator anim;
+    [SerializeField] private bool keepMoving;
     private PlayerController player;
     private bool canAttack;
     private Animator playerAnim;
@@ -21,7 +22,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            if (patrol != null)
+            if (patrol != null && !keepMoving)
             {
                 StartCoroutine(StopPatrol());
             }

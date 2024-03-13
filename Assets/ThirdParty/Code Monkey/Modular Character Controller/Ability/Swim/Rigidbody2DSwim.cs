@@ -10,11 +10,16 @@ public class Rigidbody2DSwim : MonoBehaviour
     private float verticalFloat;
     private Rigidbody2D rb2D;
     private Animator anim;
+    private TrailRenderer tr;
+
+    private float thrust = 2f;
+    private bool canDash = true;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
+        tr = GetComponent<TrailRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,17 +54,41 @@ public class Rigidbody2DSwim : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        horizontalFloat = Input.GetAxisRaw("Horizontal");
-        verticalFloat = Input.GetAxisRaw("Vertical");
+        horizontalFloat = Input.GetAxis("Horizontal");
+        verticalFloat = Input.GetAxis("Vertical");
 
         if (anim.GetBool("Swim"))
         {
             anim.SetFloat("Velocity", 0f);
-            rb2D.velocity = new Vector2(horizontalFloat * moveSpeed / 2, verticalFloat * moveSpeed / 2);
+            rb2D.velocity = new Vector2(horizontalFloat * moveSpeed, verticalFloat * moveSpeed);
 
             SwimDirection();
+
+            if (Input.GetKey(KeyCode.Space) && canDash)
+            {
+                rb2D.AddForce(transform.up * thrust, ForceMode2D.Impulse);
+                StartCoroutine(WaterDash());
+            }
+        }
+    }
+
+    IEnumerator WaterDash()
+    {
+        tr.emitting = true;
+        yield return new WaitForSeconds(0.3f);
+        tr.emitting = false;
+        canDash = false;
+        yield return new WaitForSeconds(1f);
+        canDash = true;
+    }
+
+    private void Update()
+    {
+        if (anim.GetBool("Swim"))
+        {
+            SwimDirection();         
         }
     }
 
@@ -75,7 +104,7 @@ public class Rigidbody2DSwim : MonoBehaviour
         if (horizontalFloat > 0f)
         {
             anim.SetFloat("Velocity", 1f);
-            transform.rotation = Quaternion.Euler(0f, 0f, 270f);
+            transform.rotation = Quaternion.Euler(0f, 0f, 270f);      
         }
 
         if (horizontalFloat < 0f)
@@ -106,24 +135,28 @@ public class Rigidbody2DSwim : MonoBehaviour
         {
             anim.SetFloat("Velocity", 1f);
             transform.rotation = Quaternion.Euler(0f, 0f, 315f);
+            rb2D.velocity = new Vector2(horizontalFloat * moveSpeed / 1.5f, verticalFloat * moveSpeed / 1.5f);
         }
 
         if (verticalFloat < 0f && horizontalFloat > 0f)
         {
             anim.SetFloat("Velocity", 1f);
             transform.rotation = Quaternion.Euler(0f, 0f, 225f);
+            rb2D.velocity = new Vector2(horizontalFloat * moveSpeed / 1.5f, verticalFloat * moveSpeed / 1.5f);
         }
 
         if (verticalFloat > 0f && horizontalFloat < 0f)
         {
             anim.SetFloat("Velocity", 1f);
             transform.rotation = Quaternion.Euler(0f, 0f, 45f);
+            rb2D.velocity = new Vector2(horizontalFloat * moveSpeed / 1.5f, verticalFloat * moveSpeed / 1.5f);
         }
 
         if (verticalFloat < 0f && horizontalFloat < 0f)
         {
             anim.SetFloat("Velocity", 1f);
             transform.rotation = Quaternion.Euler(0f, 0f, 135f);
+            rb2D.velocity = new Vector2(horizontalFloat * moveSpeed / 1.5f, verticalFloat * moveSpeed / 1.5f);
         }
     }
 }

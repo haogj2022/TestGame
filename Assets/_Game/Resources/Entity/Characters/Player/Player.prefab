@@ -392,5 +392,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6009ec2d5c10345bd969501648da81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 2
   swimControl: {fileID: 0}
