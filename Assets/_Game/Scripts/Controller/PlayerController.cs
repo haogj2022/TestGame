@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.SetActive(false);
             StartCoroutine(GemCollected());
         }
+
+        if (collision.gameObject.tag == "Door")
+        {
+            CancelAbility();
+        }
     }
 
     IEnumerator GemCollected()
@@ -47,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "LedgeUp")
+        if (collision.gameObject.tag == "LedgeUp" || collision.gameObject.tag == "Death")
         {
             CancelAbility();
         }

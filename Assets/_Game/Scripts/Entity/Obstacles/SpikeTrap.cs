@@ -18,8 +18,14 @@ public class SpikeTrap : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            if (collision.gameObject.GetComponent<PlayerController>().gotKey)
+            {
+                collision.gameObject.GetComponent<PlayerController>().DropKey();
+                collision.gameObject.GetComponentInChildren<Key>().DropKey();
+            }
+
             player.GetComponent<Rigidbody2DHorizontalMove>().Dead();
-            StartCoroutine(RespawnCooldown());            
+            StartCoroutine(RespawnCooldown());
         }
     }
 

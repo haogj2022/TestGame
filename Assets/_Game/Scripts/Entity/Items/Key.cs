@@ -14,14 +14,6 @@ public class Key : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Door")
-        {
-            DropKey();
-        }
-    }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -52,7 +44,7 @@ public class Key : MonoBehaviour
         DropKey();
     }
 
-    private void DropKey()
+    public void DropKey()
     {
         transform.parent = null;
         transform.position = dropKey;

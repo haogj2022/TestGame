@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6864503845851398176}
   m_Layer: 6
   m_Name: Cave Dark Plant
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
