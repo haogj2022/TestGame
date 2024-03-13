@@ -14,7 +14,7 @@ public class Tunnel : MonoBehaviour
     private Rigidbody2D rb2D;
     private BoxCollider2D boxCollider2D;
     private Animator anim;
-    private Rigidbody2DFlyAndSwim rb2DFly;
+    private Rigidbody2DFly rb2DFly;
     private PlayerController playerController;
 
     private Light2D cameraLight;
@@ -25,7 +25,7 @@ public class Tunnel : MonoBehaviour
         rb2D = player.GetComponent<Rigidbody2D>();
         boxCollider2D = player.GetComponent<BoxCollider2D>();
         anim = player.GetComponent<Animator>();
-        rb2DFly = player.GetComponent<Rigidbody2DFlyAndSwim>();
+        rb2DFly = player.GetComponent<Rigidbody2DFly>();
         playerController = player.GetComponent<PlayerController>();
 
         cameraLight = GameObject.FindGameObjectWithTag("CameraLight").GetComponent<Light2D>();
