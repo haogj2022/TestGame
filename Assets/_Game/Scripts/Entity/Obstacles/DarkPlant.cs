@@ -21,7 +21,12 @@ public class DarkPlant : MonoBehaviour
             {
                 hint.SetActive(false);
                 collision.gameObject.GetComponent<PlayerController>().DropKey();
-                collision.gameObject.GetComponentInChildren<Key>().DropKey();
+
+                if (collision.gameObject.GetComponentInChildren<Key>() != null)
+                {
+                    collision.gameObject.GetComponentInChildren<Key>().DropKey();
+                }
+                
                 anim.SetBool("Open", true);
             }
             else

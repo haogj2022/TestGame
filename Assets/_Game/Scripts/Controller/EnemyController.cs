@@ -59,6 +59,16 @@ public class EnemyController : MonoBehaviour
     {
         if (canAttack)
         {
+            if (player.gotKey)
+            {
+                player.DropKey();
+
+                if (player.gameObject.GetComponentInChildren<Key>() != null)
+                {
+                    player.gameObject.GetComponentInChildren<Key>().DropKey();
+                }
+            }
+
             player.GetComponent<Rigidbody2DHorizontalMove>().Dead();
             StartCoroutine(RespawnCooldown());            
         }  
