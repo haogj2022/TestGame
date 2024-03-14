@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem deathEffect;
     public Vector3 playerRespawn;
     [SerializeField] private Animator anim;
     [SerializeField] private bool keepMoving;
@@ -79,10 +80,13 @@ public class EnemyController : MonoBehaviour
     IEnumerator RespawnCooldown()
     {
         playerAnim.SetBool("Death", true);
-        player.gameObject.SetActive(false);        
+        deathEffect.transform.position = player.transform.position;
+        player.gameObject.SetActive(false);
+        deathEffect.Play();
         yield return new WaitForSeconds(2f);
         playerAnim.SetBool("Death", false);                  
         player.ResetPosition(playerRespawn);
         player.gameObject.SetActive(true);
+        player.GetComponent<Rigidbody2DHorizontalMove>().Flip(true);
     }
 }

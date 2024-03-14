@@ -118,7 +118,6 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
 
     public void Dead()
     {
-        isFacingRight = true;
         anim.SetBool("Dash", false);
         tr.emitting = false;
         rb2D.gravityScale = 1f;
