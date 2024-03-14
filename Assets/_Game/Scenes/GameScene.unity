@@ -2624,6 +2624,11 @@ PrefabInstance:
       objectReference: {fileID: 1097879048}
     - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
         type: 3}
+      propertyPath: respawnEffect
+      value: 
+      objectReference: {fileID: 1630741708}
+    - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
+        type: 3}
       propertyPath: playerRespawn.x
       value: 169.5
       objectReference: {fileID: 0}
@@ -7148,6 +7153,11 @@ PrefabInstance:
       propertyPath: deathEffect
       value: 
       objectReference: {fileID: 1097879048}
+    - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
+        type: 3}
+      propertyPath: respawnEffect
+      value: 
+      objectReference: {fileID: 1630741708}
     - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
         type: 3}
       propertyPath: playerRespawn.x
@@ -21729,6 +21739,11 @@ PrefabInstance:
       objectReference: {fileID: 1097879048}
     - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
         type: 3}
+      propertyPath: respawnEffect
+      value: 
+      objectReference: {fileID: 1630741708}
+    - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
+        type: 3}
       propertyPath: playerRespawn.x
       value: 169.5
       objectReference: {fileID: 0}
@@ -22218,6 +22233,11 @@ PrefabInstance:
       propertyPath: deathEffect
       value: 
       objectReference: {fileID: 1097879048}
+    - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
+        type: 3}
+      propertyPath: respawnEffect
+      value: 
+      objectReference: {fileID: 1630741708}
     - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
         type: 3}
       propertyPath: playerRespawn.x
@@ -23807,6 +23827,11 @@ PrefabInstance:
       propertyPath: deathEffect
       value: 
       objectReference: {fileID: 1097879048}
+    - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
+        type: 3}
+      propertyPath: respawnEffect
+      value: 
+      objectReference: {fileID: 1630741708}
     - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
         type: 3}
       propertyPath: playerRespawn.x
@@ -55688,6 +55713,11 @@ PrefabInstance:
       propertyPath: deathEffect
       value: 
       objectReference: {fileID: 1097879048}
+    - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
+        type: 3}
+      propertyPath: respawnEffect
+      value: 
+      objectReference: {fileID: 1630741708}
     - target: {fileID: 1437371653795598390, guid: 2ac213ec21a3bba4f83ab692847a35d5,
         type: 3}
       propertyPath: playerRespawn.x
