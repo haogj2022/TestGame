@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &757071822078545779
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 752427526018981761, guid: 4ab2d0db98d0b4d49b39ae44229f28e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Death Effect Underwater Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727390577758945247, guid: 4ab2d0db98d0b4d49b39ae44229f28e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727390577758945247, guid: 4ab2d0db98d0b4d49b39ae44229f28e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727390577758945247, guid: 4ab2d0db98d0b4d49b39ae44229f28e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727390577758945247, guid: 4ab2d0db98d0b4d49b39ae44229f28e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727390577758945247, guid: 4ab2d0db98d0b4d49b39ae44229f28e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727390577758945247, guid: 4ab2d0db98d0b4d49b39ae44229f28e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165237998303204694, guid: 4ab2d0db98d0b4d49b39ae44229f28e1,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165237998303204694, guid: 4ab2d0db98d0b4d49b39ae44229f28e1,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4ab2d0db98d0b4d49b39ae44229f28e1, type: 3}

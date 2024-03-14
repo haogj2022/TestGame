@@ -4,6 +4,7 @@ using UnityEngine;
 public class SpikeTrap : MonoBehaviour
 {
     [SerializeField] private ParticleSystem deathEffect;
+    [SerializeField] private ParticleSystem respawnEffect;
     public Vector3 playerRespawn;
 
     private PlayerController player;
@@ -39,6 +40,10 @@ public class SpikeTrap : MonoBehaviour
         yield return new WaitForSeconds(2f);
         playerAnim.SetBool("Death", false);              
         player.ResetPosition(playerRespawn);
+        Camera.main.transform.position = new Vector3(playerRespawn.x, playerRespawn.y, -10f);
+        respawnEffect.transform.position = playerRespawn;
+        respawnEffect.Play();
+        yield return new WaitForSeconds(1f);
         player.gameObject.SetActive(true);
         player.GetComponent<Rigidbody2DHorizontalMove>().Flip(true);
     }

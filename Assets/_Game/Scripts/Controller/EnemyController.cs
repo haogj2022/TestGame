@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private ParticleSystem deathEffect;
+    [SerializeField] private ParticleSystem respawnEffect;
     public Vector3 playerRespawn;
     [SerializeField] private Animator anim;
     [SerializeField] private bool keepMoving;
@@ -86,6 +87,10 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         playerAnim.SetBool("Death", false);                  
         player.ResetPosition(playerRespawn);
+        Camera.main.transform.position = new Vector3(playerRespawn.x, playerRespawn.y, -10f);
+        respawnEffect.transform.position = playerRespawn;
+        respawnEffect.Play();
+        yield return new WaitForSeconds(1f);
         player.gameObject.SetActive(true);
         player.GetComponent<Rigidbody2DHorizontalMove>().Flip(true);
     }
