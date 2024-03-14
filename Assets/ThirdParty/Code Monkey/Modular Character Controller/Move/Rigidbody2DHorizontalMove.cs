@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Rigidbody2DHorizontalMove : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeed;   
 
     private float horizontalFloat;
     private Rigidbody2D rb2D;
@@ -15,14 +15,17 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
     private float dashingCool = 1f;
     private TrailRenderer tr;
     private Animator anim;
+    private ParticleSystem dust;
 
     private bool wallDash;
+    private bool isFacingRight = true;
 
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
+        dust = GetComponentInChildren<ParticleSystem>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -49,6 +52,18 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
         {
             wallDash = false;
         }
+
+        if (collision.tag == "Water")
+        {
+            if (horizontalFloat > 0f)
+            {
+                Flip(true);
+            }
+            else
+            {
+                Flip(false);
+            }
+        }
     }
 
     private void Update()
@@ -66,10 +81,44 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
             horizontalFloat = Input.GetAxisRaw("Horizontal");
             rb2D.velocity = new Vector2(horizontalFloat * moveSpeed, rb2D.velocity.y);
         }
+
+        if (horizontalFloat > 0f && !isFacingRight)
+        {
+            if (rb2D.velocity.y == 0f)
+            {
+                CreateDust();
+            }
+
+            Flip(true);
+        }
+
+        if (horizontalFloat < 0f && isFacingRight)
+        {
+            if (rb2D.velocity.y == 0f)
+            {
+                CreateDust();
+            }
+
+            Flip(false);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "LedgeLeft")
+        {
+            Flip(true);
+        }
+
+        if (collision.gameObject.tag == "LedgeRight")
+        {
+            Flip(false);
+        }
     }
 
     public void Dead()
     {
+        isFacingRight = true;
         anim.SetBool("Dash", false);
         tr.emitting = false;
         rb2D.gravityScale = 1f;
@@ -77,22 +126,10 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
         canDash = true;
     }
 
-    private void FixedUpdate()
+    public void Flip(bool right)
     {
-        Flip();          
-    }
-
-    private void Flip()
-    {
-        if (horizontalFloat > 0f)
-        {
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-
-        if (horizontalFloat < 0f)
-        {
-            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-        }
+        isFacingRight = right;
+        transform.rotation = Quaternion.Euler(0f, right ? 0f : 180f, 0f);
     }
 
     public IEnumerator Dash()
@@ -102,6 +139,7 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
         isDashing = true;
         float originalGravity = rb2D.gravityScale;
         rb2D.gravityScale = 0f;
+        tr.emitting = true;
 
         if (transform.rotation.y >= 0f)
         {
@@ -109,9 +147,14 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
 
             if (Input.GetButton("Jump") && horizontalFloat > 0f)
             {
-                rb2D.velocity = new Vector2(dashingPower / 1.5f, dashingPower / 1.5f);
+                anim.SetBool("Dash", true);
+                rb2D.velocity = new Vector2(dashingPower / 2f, dashingPower / 2f);
                 transform.rotation = Quaternion.Euler(0f, 0f, 45f);
-            }            
+                yield return new WaitForSeconds(dashingTime);
+                tr.emitting = false;
+                anim.SetBool("Dash", false);
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            } 
         }
         else
         {
@@ -119,9 +162,14 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
 
             if (Input.GetButton("Jump") && horizontalFloat < 0f)
             {
-                rb2D.velocity = new Vector2(-dashingPower / 1.5f, dashingPower / 1.5f);
+                anim.SetBool("Dash", true);
+                rb2D.velocity = new Vector2(-dashingPower / 2f, dashingPower / 2f);
                 transform.rotation = Quaternion.Euler(0f, 180f, 45f);
-            }            
+                yield return new WaitForSeconds(dashingTime);
+                tr.emitting = false;
+                anim.SetBool("Dash", false);
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
         }
 
         if (wallDash)
@@ -129,7 +177,6 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
             anim.SetBool("Dash", false);
         }
 
-        tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         anim.SetBool("Dash", false);
         tr.emitting = false;
@@ -137,5 +184,13 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCool);
         canDash = true;
+    }
+
+    public void CreateDust()
+    {
+        if (!anim.GetBool("Tunnel"))
+        {
+            dust.Play();
+        }        
     }
 }

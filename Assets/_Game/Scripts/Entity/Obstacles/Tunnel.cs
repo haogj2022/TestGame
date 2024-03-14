@@ -99,7 +99,7 @@ public class Tunnel : MonoBehaviour
         anim.SetBool("Tunnel", false);
         boxCollider2D.enabled = true;
         rb2D.gravityScale = 1f;
-        player.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        player.GetComponent<Rigidbody2DHorizontalMove>().Flip(true);
         Camera.main.orthographicSize = 4f;
         cameraLight.pointLightOuterRadius = 10f;
     }

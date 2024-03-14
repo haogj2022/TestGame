@@ -71,6 +71,7 @@ public class EnemyController : MonoBehaviour
             }
 
             player.GetComponent<Rigidbody2DHorizontalMove>().Dead();
+            player.GetComponent<Rigidbody2DSwim>().Dead();
             StartCoroutine(RespawnCooldown());            
         }  
     }

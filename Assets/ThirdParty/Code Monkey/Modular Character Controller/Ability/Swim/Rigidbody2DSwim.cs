@@ -15,11 +15,14 @@ public class Rigidbody2DSwim : MonoBehaviour
     private float thrust = 2f;
     private bool canDash = true;
 
+    private ParticleSystem dust;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
+        dust = GetComponentInChildren<ParticleSystem>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,6 +45,7 @@ public class Rigidbody2DSwim : MonoBehaviour
     {
         if (collision.tag == "Water")
         {
+            CreateDust();
             anim.SetBool("Swim", true);
         }
     }
@@ -51,6 +55,16 @@ public class Rigidbody2DSwim : MonoBehaviour
         if (collision.tag == "Water")
         {
             anim.SetBool("Swim", false);
+
+            if (horizontalFloat > 0f)
+            {
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
+
+            if (horizontalFloat < 0f)
+            {
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
         }
     }
 
@@ -81,6 +95,11 @@ public class Rigidbody2DSwim : MonoBehaviour
         tr.emitting = false;
         canDash = false;
         yield return new WaitForSeconds(1f);
+        canDash = true;
+    }
+
+    public void Dead()
+    {
         canDash = true;
     }
 
@@ -124,7 +143,7 @@ public class Rigidbody2DSwim : MonoBehaviour
 
         if (verticalFloat < 0f)
         {
-            anim.SetFloat("Velocity", 1f);
+            anim.SetFloat("Velocity", 1f);            
             transform.rotation = Quaternion.Euler(0f, 0f, 180f);
         }
     }
@@ -158,5 +177,10 @@ public class Rigidbody2DSwim : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 0f, 135f);
             rb2D.velocity = new Vector2(horizontalFloat * moveSpeed / 1.5f, verticalFloat * moveSpeed / 1.5f);
         }
+    }
+
+    private void CreateDust()
+    {
+        dust.Play();
     }
 }

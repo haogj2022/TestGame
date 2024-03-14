@@ -18,6 +18,8 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
     private float jumpBufferTime = 0.2f;
     private float jumpBufferTimeCounter;
 
+    private ParticleSystem dust;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -25,6 +27,8 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
         groundCheck = new GameObject("Ground Check").transform;
         groundCheck.parent = transform;
         groundCheck.position = new Vector2(transform.position.x, transform.position.y - 0.25f);
+
+        dust = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Update()
@@ -57,8 +61,9 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
                 canDoubleJump = false;
             }
 
-            if (Input.GetButtonDown("Jump") && coyoteTimeCounter > 0f || jumpBufferTimeCounter > 0f && canDoubleJump)
+            if (jumpBufferTimeCounter > 0f && coyoteTimeCounter > 0f || jumpBufferTimeCounter > 0f && canDoubleJump)
             {
+                CreateDust();
                 anim.SetBool("Jump", true);
                 rb2D.velocity = Vector2.up * (canDoubleJump ? doubleJumpPower : jumpPower);
                 rb2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1f) * Time.deltaTime;
@@ -86,5 +91,10 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+
+    private void CreateDust()
+    {
+        dust.Play();
     }
 }

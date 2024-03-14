@@ -21,7 +21,16 @@ public class LedgeClimb : MonoBehaviour
         if (collision.gameObject.tag == "LedgeUp")
         {
             Physics2D.gravity = new Vector2(0f, 9.81f);
-            transform.rotation = Quaternion.Euler(180f, 0f, 0f);
+
+            if (transform.rotation.y >= 0f)
+            {
+                transform.rotation = Quaternion.Euler(180f, 0f, 0f);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(180f, 180f, 0f);
+            }
+            
             StartCoroutine(FallOffLedge());
         }        
     }
@@ -60,7 +69,15 @@ public class LedgeClimb : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);        
         Physics2D.gravity = new Vector2(0f, -9.81f);
-        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+        if (transform.rotation.y >= 0f)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -68,7 +85,16 @@ public class LedgeClimb : MonoBehaviour
         if (collision.gameObject.tag == "LedgeUp")
         {
             Physics2D.gravity = new Vector2(0f, -9.81f);
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+            if (transform.rotation.y >= 0f)
+            {
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
+
             StopAllCoroutines();
         }
 
