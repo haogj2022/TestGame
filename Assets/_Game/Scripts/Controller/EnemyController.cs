@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour
     IEnumerator StopPatrol()
     {
         patrol._speed = 0f;
-        yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(1f);
         patrol._speed = 2f;
     }
 

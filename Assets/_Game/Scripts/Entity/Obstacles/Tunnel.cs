@@ -15,7 +15,6 @@ public class Tunnel : MonoBehaviour
     private BoxCollider2D boxCollider2D;
     private Animator anim;
     private Rigidbody2DFly rb2DFly;
-    private PlayerController playerController;
 
     private Light2D cameraLight;
 
@@ -26,7 +25,6 @@ public class Tunnel : MonoBehaviour
         boxCollider2D = player.GetComponent<BoxCollider2D>();
         anim = player.GetComponent<Animator>();
         rb2DFly = player.GetComponent<Rigidbody2DFly>();
-        playerController = player.GetComponent<PlayerController>();
 
         cameraLight = GameObject.FindGameObjectWithTag("CameraLight").GetComponent<Light2D>();
     }
@@ -43,7 +41,7 @@ public class Tunnel : MonoBehaviour
                 if (Input.GetKey(KeyCode.E))
                 {
                     rb2DFly.StartCoroutine(rb2DFly.TransformEffect());
-                    playerController.ShowControl();
+                    player.GetComponent<PlayerController>().ShowControl();
                     promptText.SetActive(false);
                     player.transform.position = transform.position;
                     EnterTunnel();

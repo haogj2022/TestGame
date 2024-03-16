@@ -56,7 +56,7 @@ public class PatrolCoroutines : MonoBehaviour
 
     IEnumerator DetectCooldown()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         StopAllCoroutines();
         Flip();
         anim.SetBool("Idle", false);

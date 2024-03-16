@@ -143,32 +143,10 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
         if (transform.rotation.y >= 0f)
         {
             rb2D.velocity = new Vector2(dashingPower, 0f);
-
-            if (Input.GetButton("Jump") && horizontalFloat > 0f)
-            {
-                anim.SetBool("Dash", true);
-                rb2D.velocity = new Vector2(dashingPower / 2f, dashingPower / 2f);
-                transform.rotation = Quaternion.Euler(0f, 0f, 45f);
-                yield return new WaitForSeconds(dashingTime);
-                tr.emitting = false;
-                anim.SetBool("Dash", false);
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            } 
         }
         else
         {
             rb2D.velocity = new Vector2(-dashingPower, 0f);
-
-            if (Input.GetButton("Jump") && horizontalFloat < 0f)
-            {
-                anim.SetBool("Dash", true);
-                rb2D.velocity = new Vector2(-dashingPower / 2f, dashingPower / 2f);
-                transform.rotation = Quaternion.Euler(0f, 180f, 45f);
-                yield return new WaitForSeconds(dashingTime);
-                tr.emitting = false;
-                anim.SetBool("Dash", false);
-                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-            }
         }
 
         if (wallDash)
