@@ -8,10 +8,11 @@ public class EnemyController : MonoBehaviour
     public Vector3 playerRespawn;
     [SerializeField] private Animator anim;
     [SerializeField] private bool keepMoving;
+    [SerializeField] private float patrolDelay = 1f;
     private PlayerController player;
     private bool canAttack;
     private Animator playerAnim;
-    private PatrolCoroutines patrol;
+    private PatrolCoroutines patrol;   
 
     private void Start()
     {
@@ -26,19 +27,19 @@ public class EnemyController : MonoBehaviour
         {
             if (patrol != null && !keepMoving)
             {
-                StartCoroutine(StopPatrol());
+                StartCoroutine(StopPatrol());   
             }
             
             anim.SetBool("Attack", true);
-            canAttack = true;
+            canAttack = true;           
         }
     }
 
     IEnumerator StopPatrol()
     {
         patrol._speed = 0f;
-        yield return new WaitForSeconds(1f);
-        patrol._speed = 2f;
+        yield return new WaitForSeconds(patrolDelay);
+        patrol._speed = 2f;    
     }
 
     private void OnTriggerExit2D(Collider2D collision)
