@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2996707206969345995}
   - component: {fileID: 3042825539339418357}
   - component: {fileID: 5529248393466374055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skeleton Boss Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}

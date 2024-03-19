@@ -9,7 +9,6 @@ public class LookAt : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("Hit");
             mage.canAttack = true;
         }
     }
@@ -18,7 +17,6 @@ public class LookAt : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("Missed");
             mage.canAttack = false;
         }
     }
