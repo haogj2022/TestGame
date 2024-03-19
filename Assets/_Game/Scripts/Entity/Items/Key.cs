@@ -7,6 +7,8 @@ public class Key : MonoBehaviour
 
     [SerializeField] private GameObject promptText;
 
+    [SerializeField] private bool bossKey;
+
     private BoxCollider2D boxCollider2D;
 
     private void Awake()
@@ -18,14 +20,23 @@ public class Key : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            promptText.transform.position = new Vector2(transform.position.x, transform.position.y + 1f);
-            promptText.SetActive(true);
-
-            if (Input.GetKey(KeyCode.E))
+            if (!bossKey)
+            {
+                promptText.transform.position = new Vector2(transform.position.x, transform.position.y + 1f);
+                promptText.SetActive(true);
+            }
+            else
             {
                 collision.gameObject.GetComponent<PlayerController>().GotKey();
                 PickUpKey(collision);
-                StartCoroutine(DespawnKey());
+            }
+
+            if (Input.GetKey(KeyCode.E))
+            {
+                if (!bossKey)
+                {
+                    StartCoroutine(DespawnKey());
+                }                
             }
         }
     }
@@ -46,6 +57,11 @@ public class Key : MonoBehaviour
 
     public void DropKey()
     {
+        if (bossKey)
+        {
+            gameObject.SetActive(true);
+        }
+
         transform.parent = null;
         transform.position = dropKey;
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);

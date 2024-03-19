@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject abilityBar;
     [SerializeField] Animator tunnelControl;
     [SerializeField] Animator gemCollected;
+    [SerializeField] Animator keyCollected;
     [HideInInspector] public bool gotKey;
     private Animator anim;
 
@@ -37,6 +38,11 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(GemCollected());
         }
 
+        if (collision.gameObject.tag == "BossKey")
+        {
+            StartCoroutine(KeyCollected());
+        }
+
         if (collision.gameObject.tag == "Door")
         {
             CancelAbility();
@@ -45,9 +51,16 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator GemCollected()
     {
-        gemCollected.SetBool("Gem", true);
+        gemCollected.SetBool("Collected", true);
         yield return new WaitForSeconds(2f);
-        gemCollected.SetBool("Gem", false);
+        gemCollected.SetBool("Collected", false);
+    }
+
+    IEnumerator KeyCollected()
+    {
+        keyCollected.SetBool("Collected", true);
+        yield return new WaitForSeconds(2f);
+        keyCollected.SetBool("Collected", false);
     }
 
     private void OnCollisionExit2D(Collision2D collision)

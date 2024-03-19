@@ -10,15 +10,25 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private bool keepMoving;
     [SerializeField] private float patrolDelay = 1f;
     private PlayerController player;
-    private bool canAttack;
+    [HideInInspector] public bool canAttack;
     private Animator playerAnim;
-    private PatrolCoroutines patrol;   
+    private PatrolCoroutines patrol;
+
+    [HideInInspector] public bool isAttacking;
 
     private void Start()
     {
         player = GameManager.Instance.playerController;
         playerAnim = player.gameObject.GetComponent<Animator>();
         patrol = GetComponentInParent<PatrolCoroutines>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            canAttack = true;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -30,8 +40,7 @@ public class EnemyController : MonoBehaviour
                 StartCoroutine(StopPatrol());   
             }
             
-            anim.SetBool("Attack", true);
-            canAttack = true;           
+            anim.SetBool("Attack", true);    
         }
     }
 
@@ -59,6 +68,18 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void AttackReady()
+    {
+        isAttacking = true;
+        StartCoroutine(AimAttack());
+    }
+
+    IEnumerator AimAttack()
+    {
+        yield return new WaitForSeconds(1f);
+        isAttacking = false;
+    }
+
     public void Attack()
     {
         if (canAttack)
@@ -75,7 +96,7 @@ public class EnemyController : MonoBehaviour
 
             player.GetComponent<Rigidbody2DHorizontalMove>().Dead();
             player.GetComponent<Rigidbody2DSwim>().Dead();
-            StartCoroutine(RespawnCooldown());            
+            StartCoroutine(RespawnCooldown());           
         }  
     }
 

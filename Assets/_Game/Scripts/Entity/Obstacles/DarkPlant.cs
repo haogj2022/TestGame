@@ -1,8 +1,13 @@
+using System.Collections;
 using UnityEngine;
 
 public class DarkPlant : MonoBehaviour
 {
     [SerializeField] private GameObject hint;
+    [SerializeField] private bool bossDoor;
+    [SerializeField] private CameraShake cameraShake;
+    public float camShakeAmt = 0.1f;
+    public float camShakeLength = 0.1f;
 
     private Animator anim;
     private BoxCollider2D boxCollider2D;
@@ -19,7 +24,11 @@ public class DarkPlant : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<PlayerController>().gotKey)
             {
-                hint.SetActive(false);
+                if (!bossDoor)
+                {
+                    hint.SetActive(false);
+                }
+                
                 collision.gameObject.GetComponent<PlayerController>().DropKey();
 
                 if (collision.gameObject.GetComponentInChildren<Key>() != null)
@@ -28,20 +37,37 @@ public class DarkPlant : MonoBehaviour
                 }
                 
                 anim.SetBool("Open", true);
+
+                if (bossDoor)
+                {
+                    StartCoroutine(BossDoorOpen());
+                }
             }
             else
             {
-                hint.transform.position = transform.position;
-                hint.SetActive(true);
+                if (!bossDoor)
+                {
+                    hint.transform.position = transform.position;
+                    hint.SetActive(true);
+                }                
             }
         }
+    }
+
+    IEnumerator BossDoorOpen()
+    {
+        yield return new WaitForSeconds(1f);
+        cameraShake.Shake(camShakeAmt, camShakeLength);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            hint.SetActive(false);
+            if (!bossDoor)
+            {
+                hint.SetActive(false);
+            }            
         }
     }
 

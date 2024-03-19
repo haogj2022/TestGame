@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4326126680350029686}
   m_Layer: 0
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,6 +152,7 @@ MonoBehaviour:
   playerRespawn: {x: 0, y: 0, z: 0}
   anim: {fileID: 3407497662049167510}
   keepMoving: 0
+  patrolDelay: 1
 --- !u!1 &7408849258992625478
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1437371653795598390}
   m_Layer: 0
   m_Name: Fish
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,6 +153,7 @@ MonoBehaviour:
   playerRespawn: {x: 0, y: 0, z: 0}
   anim: {fileID: 411527894749462707}
   keepMoving: 1
+  patrolDelay: 1
 --- !u!1 &3118625360702359686
 GameObject:
   m_ObjectHideFlags: 0

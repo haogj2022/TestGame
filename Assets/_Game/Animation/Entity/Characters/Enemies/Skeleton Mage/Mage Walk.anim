@@ -47,7 +47,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Light 2D (1)
+    path: Laser/Light 2D (1)
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
@@ -85,7 +85,7 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
     - serializedVersion: 2
-      path: 2688577911
+      path: 4137810137
       attribute: 3
       script: {fileID: 0}
       typeID: 4
@@ -190,7 +190,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Light 2D (1)
+    path: Laser/Light 2D (1)
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -209,7 +209,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Light 2D (1)
+    path: Laser/Light 2D (1)
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -228,7 +228,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Light 2D (1)
+    path: Laser/Light 2D (1)
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []
