@@ -12,9 +12,12 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool gotKey;
     private Animator anim;
 
+    private CameraController cameraController;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        cameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
 
     private void Update()
@@ -22,6 +25,14 @@ public class PlayerController : MonoBehaviour
         if (anim.GetBool("Fly"))
         {
             ActivateAbility();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "BossRoom")
+        {
+            cameraController.ShowBoss();
         }
     }
 
