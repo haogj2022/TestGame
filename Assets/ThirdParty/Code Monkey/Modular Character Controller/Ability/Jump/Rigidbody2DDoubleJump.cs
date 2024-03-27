@@ -80,11 +80,6 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
 
                 coyoteTimeCounter = 0f;
             }
-
-            if (rb2D.velocity.y < -10f)
-            {
-                rb2D.velocity = new Vector2(rb2D.velocity.x, -10f);
-            }
         }        
     }
 

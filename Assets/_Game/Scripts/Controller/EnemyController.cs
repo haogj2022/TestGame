@@ -3,24 +3,30 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem deathEffect;
-    [SerializeField] private ParticleSystem respawnEffect;
     public Vector3 playerRespawn;
     [SerializeField] private Animator anim;
     [SerializeField] private bool keepMoving;
     [SerializeField] private float patrolDelay = 1f;
+    public bool isBoss;
     private PlayerController player;
     [HideInInspector] public bool canAttack;
-    private Animator playerAnim;
     private PatrolCoroutines patrol;
-
     [HideInInspector] public bool isAttacking;
+    private GameObject boss;
 
     private void Start()
     {
         player = GameManager.Instance.playerController;
-        playerAnim = player.gameObject.GetComponent<Animator>();
         patrol = GetComponentInParent<PatrolCoroutines>();
+        boss = GameObject.FindGameObjectWithTag("MainBoss");
+    }
+
+    private void Update()
+    {
+        if (!isBoss)
+        {
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), boss.GetComponent<BoxCollider2D>());
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,19 +34,13 @@ public class EnemyController : MonoBehaviour
         if (collision.tag == "Player")
         {
             canAttack = true;
-        }
-    }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
             if (patrol != null && !keepMoving)
             {
-                StartCoroutine(StopPatrol());   
+                StartCoroutine(StopPatrol());
             }
-            
-            anim.SetBool("Attack", true);    
+
+            anim.SetBool("Attack", true);
         }
     }
 
@@ -82,6 +82,12 @@ public class EnemyController : MonoBehaviour
 
     public void Attack()
     {
+        if (!player.isVulnerable || player.gotSword && player.canParry)
+        {
+            anim.SetBool("Attack", false);
+            canAttack = false;
+        }
+
         if (canAttack)
         {
             if (player.gotKey)
@@ -94,26 +100,19 @@ public class EnemyController : MonoBehaviour
                 }
             }
 
+            if (player.gotSword)
+            {
+                player.DropSword();
+
+                if (player.gameObject.GetComponentInChildren<Key>() != null)
+                {
+                    player.gameObject.GetComponentInChildren<Key>().DropSword();
+                }
+            }
+
             player.GetComponent<Rigidbody2DHorizontalMove>().Dead();
             player.GetComponent<Rigidbody2DSwim>().Dead();
-            StartCoroutine(RespawnCooldown());           
+            GameManager.Instance.RespawnPlayer(playerRespawn);           
         }  
-    }
-
-    IEnumerator RespawnCooldown()
-    {
-        playerAnim.SetBool("Death", true);
-        deathEffect.transform.position = player.transform.position;
-        player.gameObject.SetActive(false);
-        deathEffect.Play();
-        yield return new WaitForSeconds(2f);
-        playerAnim.SetBool("Death", false);                  
-        player.ResetPosition(playerRespawn);
-        Camera.main.transform.position = new Vector3(playerRespawn.x, playerRespawn.y, -10f);
-        respawnEffect.transform.position = playerRespawn;
-        respawnEffect.Play();
-        yield return new WaitForSeconds(1f);
-        player.gameObject.SetActive(true);
-        player.GetComponent<Rigidbody2DHorizontalMove>().Flip(true);
-    }
+    }   
 }

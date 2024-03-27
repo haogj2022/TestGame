@@ -57,10 +57,7 @@ public class PatrolCoroutines : MonoBehaviour
     IEnumerator DetectCooldown()
     {
         yield return new WaitForSeconds(0.5f);
-        StopAllCoroutines();
-        Flip();
-        anim.SetBool("Idle", false);
-        _currentWaypointIndex = (_currentWaypointIndex + 1) % waypoints.Length;
+        StopAllCoroutines();       
         Continue();
     }
 
@@ -80,11 +77,16 @@ public class PatrolCoroutines : MonoBehaviour
     }
     public void Interupt()
     {
-        StopCoroutine(_prevCoroutine);
+        anim.SetBool("Idle", true);
+        _speed = 0f;
     }
 
     public void Continue()
     {
+        Flip();
+        anim.SetBool("Idle", false);
+        _currentWaypointIndex = (_currentWaypointIndex + 1) % waypoints.Length;
         _prevCoroutine = StartCoroutine(_MovingToNextWaypoint());
+        _speed = 2f;
     }
 }

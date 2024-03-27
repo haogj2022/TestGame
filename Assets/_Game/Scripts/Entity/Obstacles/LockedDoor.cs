@@ -13,13 +13,10 @@ public class LockedDoor : MonoBehaviour
     private Animator anim;
     private BoxCollider2D boxCollider2D;
 
-    private CameraController cameraController;
-
     private void Awake()
     {
         anim = GetComponent<Animator>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        cameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,6 +29,12 @@ public class LockedDoor : MonoBehaviour
                 cameraShake.Shake(camShakeAmt, camShakeLength);
             }
         }
+    }
+
+    public void BossAreaCleared()
+    {
+        anim.SetBool("Open", true);
+        cameraShake.Shake(camShakeAmt, camShakeLength);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

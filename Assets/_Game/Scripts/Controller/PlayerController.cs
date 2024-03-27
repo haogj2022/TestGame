@@ -10,8 +10,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator gemCollected;
     [SerializeField] Animator keyCollected;
     [HideInInspector] public bool gotKey;
+    [HideInInspector] public bool gotSword;
+    [HideInInspector] public bool isVulnerable = true;
+    [HideInInspector] public bool canParry;
     private Animator anim;
-
+    private Key sword;
     private CameraController cameraController;
 
     private void Awake()
@@ -26,6 +29,25 @@ public class PlayerController : MonoBehaviour
         {
             ActivateAbility();
         }
+
+        if (gotSword)
+        {
+            sword = GetComponentInChildren<Key>();
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                StartCoroutine(Parry());
+            }           
+        }        
+    }   
+
+    IEnumerator Parry()
+    {
+        canParry = true;
+        sword.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f);
+        yield return new WaitForSeconds(1f);
+        sword.transform.rotation = transform.rotation;
+        canParry = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -92,6 +114,16 @@ public class PlayerController : MonoBehaviour
         gotKey = false;
     }
 
+    public void GotSword()
+    {
+        gotSword = true;
+    }
+
+    public void DropSword()
+    {
+        gotSword = false;
+    }
+
     public void ActivateAbility()
     {
         abilityBar.SetActive(true);
@@ -118,6 +150,7 @@ public class PlayerController : MonoBehaviour
     public void ResetPosition(Vector2 playerRespawn)
     {
         CancelAbility();
+        canParry = false;
         transform.position = playerRespawn;
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
