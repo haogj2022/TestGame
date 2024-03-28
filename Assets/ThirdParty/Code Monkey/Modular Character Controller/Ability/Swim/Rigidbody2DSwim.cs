@@ -80,7 +80,7 @@ public class Rigidbody2DSwim : MonoBehaviour
 
             SwimDirection();
 
-            if (Input.GetKey(KeyCode.Space) && canDash)
+            if (Input.GetKey(KeyCode.Q) && canDash)
             {
                 rb2D.AddForce(transform.up * thrust, ForceMode2D.Impulse);
                 StartCoroutine(WaterDash());
