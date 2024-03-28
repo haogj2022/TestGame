@@ -161,6 +161,7 @@ MonoBehaviour:
   spikeRespawn: {x: 0, y: 0, z: 0}
   groundCheck: {fileID: 1943486280669504169}
   hitBox: {fileID: 7663731557059869118}
+  fallingSpike: 1
   floorHeight: -0.15
   filter:
     useTriggers: 0

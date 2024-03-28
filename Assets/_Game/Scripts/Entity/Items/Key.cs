@@ -46,6 +46,8 @@ public class Key : MonoBehaviour
             {
                 if (!bossKey)
                 {
+                    collision.gameObject.GetComponent<PlayerController>().GotKey();
+                    PickUpKey(collision);
                     StartCoroutine(DespawnKey());
                 }                
             }

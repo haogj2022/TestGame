@@ -59,8 +59,12 @@ public class CameraController : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
             if (player == null) return;
             transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10f);
-            Camera.main.orthographicSize = 4f;
-            cameraLight.pointLightOuterRadius = 10f;
+
+            if (!player.GetComponent<Animator>().GetBool("Tunnel"))
+            {
+                Camera.main.orthographicSize = 4f;
+                cameraLight.pointLightOuterRadius = 10f;
+            }
         }
     }
 

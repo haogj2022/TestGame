@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     public ParticleSystem deathEffect;
     public ParticleSystem respawnEffect;
     public GameObject respawnShield;
+    public Animator batControl;
+    public Animator tunnelControl;
+    public Animator swimControl;
+    public Animator gemCollected;
+    public Animator keyCollected;
 
     private void Awake()
     {
@@ -23,6 +28,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator RespawnCooldown(Vector3 playerRespawn)
     {
+        batControl.SetBool("Left", false);
+        tunnelControl.SetBool("Left", false);
+        swimControl.SetBool("Left", false);
+        gemCollected.SetBool("Collected", false);
+        keyCollected.SetBool("Collected", false);
         playerController.GetComponent<Animator>().SetBool("Death", true);
         deathEffect.transform.position = playerController.transform.position;
         playerController.gameObject.SetActive(false);

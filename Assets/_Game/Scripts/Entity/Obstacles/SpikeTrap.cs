@@ -7,6 +7,7 @@ public class SpikeTrap : MonoBehaviour
     public Vector3 spikeRespawn;
     public Transform groundCheck;
     public BoxCollider2D hitBox;
+    public bool fallingSpike;
     public float floorHeight = 1.25f;
     public ContactFilter2D filter;
 
@@ -33,7 +34,7 @@ public class SpikeTrap : MonoBehaviour
 
     private void Update()
     {
-        if (canFall)
+        if (canFall && fallingSpike)
         {
             velocity += gravity * gravityScale * Time.deltaTime;
             transform.Translate(new Vector2(0f, velocity) * Time.deltaTime);
@@ -52,7 +53,8 @@ public class SpikeTrap : MonoBehaviour
                 transform.position = new Vector2(transform.position.x, surface.y);               
             }
         }
-        else
+
+        if (!canFall && fallingSpike)
         {
             transform.position = spikeRespawn;
         }
@@ -98,22 +100,42 @@ public class SpikeTrap : MonoBehaviour
                 if (player.gotKey)
                 {
                     player.DropKey();
-                    player.gameObject.GetComponentInChildren<Key>().DropKey();
+
+                    if (player.gameObject.GetComponentInChildren<Key>() != null)
+                    {
+                        player.gameObject.GetComponentInChildren<Key>().DropKey();
+                    }                    
                 }
 
                 if (player.gotSword)
                 {
                     player.DropSword();
-                    player.gameObject.GetComponentInChildren<Key>().DropSword();
+
+                    if (player.gameObject.GetComponentInChildren<Key>() != null)
+                    {
+                        player.gameObject.GetComponentInChildren<Key>().DropSword();
+                    }                    
                 }
-                
+            }
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (player.isVulnerable)
+            {
                 player.GetComponent<Rigidbody2DHorizontalMove>().Dead();
                 GameManager.Instance.RespawnPlayer(playerRespawn);
             }
 
             if (!player.isVulnerable)
             {
-                Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), player.GetComponent<BoxCollider2D>());
+                if (GetComponent<BoxCollider2D>() != null)
+                {
+                    Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), player.GetComponent<BoxCollider2D>());
+                }
             }
         }
     }
