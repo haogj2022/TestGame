@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private bool keepMoving;
     [SerializeField] private float patrolDelay = 1f;
     public bool isBoss;
+    private AudioManager audioManager;
     private PlayerController player;
     [HideInInspector] public bool canAttack;
     private PatrolCoroutines patrol;
@@ -16,6 +17,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("MainAudio").GetComponent<AudioManager>();
         player = GameManager.Instance.playerController;
         patrol = GetComponentInParent<PatrolCoroutines>();
         boss = GameObject.FindGameObjectWithTag("MainBoss");
@@ -64,6 +66,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Obstacle")
         {
+            audioManager.Dead();
             gameObject.SetActive(false);
         }
     }
@@ -78,6 +81,11 @@ public class EnemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         isAttacking = false;
+    }
+
+    public void Dead()
+    {
+        audioManager.Dead();
     }
 
     public void Attack()

@@ -7,6 +7,7 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
 
     private float horizontalFloat;
     private Rigidbody2D rb2D;
+    public AudioManager audioManager;
 
     [HideInInspector] public bool canDash = true;
     private bool isDashing;
@@ -72,6 +73,7 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
         {
             if (!anim.GetBool("Tunnel") && !anim.GetBool("Fly") && !anim.GetBool("Crouch"))
             {
+                audioManager.Dash();
                 StartCoroutine(Dash());
             }          
         }

@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     public GameObject bossUI;
     public GameObject skeletonWarrior;
     public Vector3 respawnLocation;
+    public AudioManager audioManager;
     private GameObject player;
     [HideInInspector] public bool bossRoom;
     [HideInInspector] public bool respawnSkeleton = true;
@@ -86,6 +87,7 @@ public class CameraController : MonoBehaviour
 
     public void ShowBoss()
     {
+        audioManager.Boss();
         StartCoroutine(BossPreview());
     }
 

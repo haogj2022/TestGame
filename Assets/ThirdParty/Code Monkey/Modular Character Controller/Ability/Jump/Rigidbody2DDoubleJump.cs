@@ -5,15 +5,16 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
     [SerializeField] private float jumpPower;
     [SerializeField] private float doubleJumpPower;
     [SerializeField] private LayerMask groundLayer;
+    public AudioManager audioManager;
 
     private Animator anim;
     private Rigidbody2D rb2D;
     private Transform groundCheck;
     private bool canDoubleJump;
-    private float fallMultiplier = 2.5f;
-    private float lowJumpMultiplier = 2f;
+    //private float fallMultiplier = 1f;
+    //private float lowJumpMultiplier = 1f;
 
-    private float coyoteTime = 0.5f;
+    private float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
     private float jumpBufferTime = 0.2f;
     private float jumpBufferTimeCounter;
@@ -63,10 +64,11 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
 
             if (jumpBufferTimeCounter > 0f && coyoteTimeCounter > 0f || jumpBufferTimeCounter > 0f && canDoubleJump)
             {
+                audioManager.Jump();
                 CreateDust();
                 anim.SetBool("Jump", true);
-                rb2D.velocity = Vector2.up * (canDoubleJump ? doubleJumpPower : jumpPower);
-                rb2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1f) * Time.deltaTime;
+                rb2D.velocity = new Vector2(rb2D.velocity.x, canDoubleJump ? doubleJumpPower : jumpPower);
+                //rb2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1f) * Time.deltaTime;
                 canDoubleJump = !canDoubleJump;
 
                 jumpBufferTimeCounter = 0f;
@@ -75,8 +77,8 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
             if (Input.GetButtonUp("Jump") && rb2D.velocity.y > 0f)
             {
                 anim.SetBool("Jump", true);
-                rb2D.velocity = Vector2.up * 0.5f;
-                rb2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1f) * Time.deltaTime;
+                rb2D.velocity = new Vector2(rb2D.velocity.x, rb2D.velocity.y * 0.5f);
+                //rb2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1f) * Time.deltaTime;
 
                 coyoteTimeCounter = 0f;
             }

@@ -63,7 +63,7 @@ public class SpikeTrap : MonoBehaviour
     IEnumerator Fall()
     {
         yield return new WaitForSeconds(2f);
-        float random = Random.Range(0f, 1f);
+        float random = Random.Range(0f, 1f);       
 
         if (random > 0.5f)
         {

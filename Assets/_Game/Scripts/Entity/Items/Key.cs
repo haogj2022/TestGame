@@ -13,6 +13,8 @@ public class Key : MonoBehaviour
 
     [SerializeField] Animator parryControl;
 
+    public AudioManager audioManager;
+
     private BoxCollider2D boxCollider2D;
 
     private void Awake()
@@ -38,6 +40,7 @@ public class Key : MonoBehaviour
 
             if (enemyDrop)
             {
+                audioManager.Sword();
                 collision.gameObject.GetComponent<PlayerController>().GotSword();
                 PickUpKey(collision);
             }

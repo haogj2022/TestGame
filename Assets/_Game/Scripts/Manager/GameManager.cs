@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Animator swimControl;
     public Animator gemCollected;
     public Animator keyCollected;
+    public AudioManager audioManager;
 
     private void Awake()
     {
@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     public void RespawnPlayer(Vector3 respawnLocation)
     {
+        audioManager.Dead();
         StartCoroutine(RespawnCooldown(respawnLocation));
     }
 

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool gotSword;
     [HideInInspector] public bool isVulnerable = true;
     [HideInInspector] public bool canParry;
+    public AudioManager audioManager;
     private Animator anim;
     private Key sword;
     private CameraController cameraController;
@@ -67,12 +68,14 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "Gem")
         {
+            audioManager.Gem();
             collision.gameObject.SetActive(false);
             StartCoroutine(GemCollected());
         }
 
         if (collision.gameObject.tag == "BossKey")
         {
+            audioManager.Gem();
             StartCoroutine(KeyCollected());
         }
 

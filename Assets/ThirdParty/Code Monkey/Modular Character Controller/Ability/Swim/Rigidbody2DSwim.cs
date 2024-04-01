@@ -91,7 +91,7 @@ public class Rigidbody2DSwim : MonoBehaviour
     IEnumerator WaterDash()
     {
         tr.emitting = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         tr.emitting = false;
         canDash = false;
         yield return new WaitForSeconds(1f);

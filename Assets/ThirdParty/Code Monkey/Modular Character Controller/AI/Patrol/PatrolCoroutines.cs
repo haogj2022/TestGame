@@ -56,7 +56,7 @@ public class PatrolCoroutines : MonoBehaviour
 
     IEnumerator DetectCooldown()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         StopAllCoroutines();       
         Continue();
     }
