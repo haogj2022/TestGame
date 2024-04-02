@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class LedgeClimb : MonoBehaviour
 {
+    public Animator dropDownControl;
+
     private float horizontalFloat;
     private Animator anim;
+
+    private float rotY;
 
     private void Awake()
     {
@@ -20,6 +24,8 @@ public class LedgeClimb : MonoBehaviour
     {
         if (collision.gameObject.tag == "LedgeUp")
         {
+            StartCoroutine(ShowDropDownControl());
+
             Physics2D.gravity = new Vector2(0f, 9.81f);
 
             if (transform.rotation.y >= 0f)
@@ -30,9 +36,14 @@ public class LedgeClimb : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(180f, 180f, 0f);
             }
-            
-            StartCoroutine(FallOffLedge());
         }        
+    }
+
+    IEnumerator ShowDropDownControl()
+    {
+        dropDownControl.SetBool("Left", true);
+        yield return new WaitForSeconds(3f);
+        dropDownControl.SetBool("Left", false);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -53,30 +64,34 @@ public class LedgeClimb : MonoBehaviour
         
         if (collision.gameObject.tag == "LedgeUp")
         {
+            Physics2D.gravity = new Vector2(0f, 9.81f);
+            transform.rotation = Quaternion.Euler(180f, rotY, 0f);
+
             if (horizontalFloat > 0f)
             {
-                transform.rotation = Quaternion.Euler(180f, 0f, 0f);
+                rotY = 0f;                
+                transform.rotation = Quaternion.Euler(180f, rotY, 0f);
             }
 
             if (horizontalFloat < 0f)
             {
-                transform.rotation = Quaternion.Euler(180f, 180f, 0f);
-            }               
-        }
-    }
+                rotY = 180f;
+                transform.rotation = Quaternion.Euler(180f, rotY, 0f);
+            }         
+            
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            {
+                Physics2D.gravity = new Vector2(0f, -9.81f);
 
-    IEnumerator FallOffLedge()
-    {
-        yield return new WaitForSeconds(3f);        
-        Physics2D.gravity = new Vector2(0f, -9.81f);
-
-        if (transform.rotation.y >= 0f)
-        {
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                if (transform.rotation.y >= 0f)
+                {
+                    transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                }
+            }
         }
     }
 
@@ -94,8 +109,6 @@ public class LedgeClimb : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             }
-
-            StopAllCoroutines();
         }
 
         if (collision.gameObject.tag == "LedgeLeft")

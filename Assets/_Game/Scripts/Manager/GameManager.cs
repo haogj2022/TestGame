@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     public void RespawnPlayer(Vector3 respawnLocation)
     {
         audioManager.Dead();
+        playerController.CancelAbility();
+        playerController.DropKey();
+        playerController.DropSword();
         StartCoroutine(RespawnCooldown(respawnLocation));
     }
 

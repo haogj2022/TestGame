@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "LedgeUp" || collision.gameObject.tag == "Item" && Input.GetKey(KeyCode.E))
+        if (collision.gameObject.tag == "Item" && Input.GetKey(KeyCode.E))
         {
             ActivateAbility();
         }
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "LedgeUp" || collision.gameObject.tag == "Death")
+        if (collision.gameObject.tag == "Death")
         {
             CancelAbility();
         }
@@ -152,7 +152,6 @@ public class PlayerController : MonoBehaviour
 
     public void ResetPosition(Vector2 playerRespawn)
     {
-        CancelAbility();
         canParry = false;
         transform.position = playerRespawn;
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);

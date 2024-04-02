@@ -25,7 +25,7 @@ public class Crouch : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "LedgeUp")
+        if (collision.gameObject.tag == "LedgeUp" || collision.gameObject.tag == "LedgeRight" || collision.gameObject.tag == "LedgeLeft")
         {
             canCrouch = false;
         }
@@ -33,7 +33,7 @@ public class Crouch : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "LedgeUp")
+        if (collision.gameObject.tag == "LedgeUp" || collision.gameObject.tag == "LedgeRight" || collision.gameObject.tag == "LedgeLeft")
         {
             canCrouch = true;
         }
