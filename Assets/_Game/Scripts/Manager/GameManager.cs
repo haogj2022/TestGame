@@ -15,18 +15,30 @@ public class GameManager : MonoBehaviour
     public Animator gemCollected;
     public Animator keyCollected;
     public AudioManager audioManager;
+    public UIManager UIManager;
+    public Health health;
+    public int numOfHearts = 5;
+    public int numOfGems = 0;
 
     private void Awake()
     {
         Instance = this;
     }
 
+    private void Update()
+    {
+        health.health = numOfHearts;
+        UIManager.numOfGems.text = "X " + numOfGems;
+    }
+
     public void RespawnPlayer(Vector3 respawnLocation)
     {
+        numOfHearts -= 1;
         audioManager.Dead();
         playerController.CancelAbility();
         playerController.DropKey();
-        playerController.DropSword();
+        playerController.DropSilverSword();
+        playerController.DropGoldSword();
         StartCoroutine(RespawnCooldown(respawnLocation));
     }
 
@@ -41,7 +53,15 @@ public class GameManager : MonoBehaviour
         deathEffect.transform.position = playerController.transform.position;
         playerController.gameObject.SetActive(false);
         deathEffect.Play();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+
+        if (numOfHearts <= 0)
+        {
+            Time.timeScale = 0;
+            UIManager.DeathMessage();
+        }
+
+        yield return new WaitForSeconds(1f);               
         playerController.GetComponent<Animator>().SetBool("Death", false);
         playerController.ResetPosition(playerRespawn);
         Camera.main.transform.position = new Vector3(playerRespawn.x, playerRespawn.y, -10f);
@@ -52,7 +72,7 @@ public class GameManager : MonoBehaviour
         Physics2D.gravity = new Vector2(0f, -9.81f);
         playerController.isVulnerable = false;
         EnableShield();
-        playerController.GetComponent<Rigidbody2DHorizontalMove>().Flip(true);        
+        playerController.GetComponent<Rigidbody2DHorizontalMove>().Flip(true);
         yield return new WaitForSeconds(3f);
         playerController.isVulnerable = true;
         DisableShield();

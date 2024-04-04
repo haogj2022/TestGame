@@ -9,7 +9,9 @@ public class Key : MonoBehaviour
 
     [SerializeField] private bool bossKey;
 
-    [SerializeField] private bool enemyDrop;
+    [SerializeField] private bool silverSword;
+
+    [SerializeField] private bool goldSword;
 
     [SerializeField] Animator parryControl;
 
@@ -26,7 +28,7 @@ public class Key : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (!bossKey && !enemyDrop)
+            if (!bossKey && !silverSword && !goldSword)
             {
                 promptText.transform.position = new Vector2(transform.position.x, transform.position.y + 1f);
                 promptText.SetActive(true);
@@ -38,11 +40,36 @@ public class Key : MonoBehaviour
                 PickUpKey(collision);
             }
 
-            if (enemyDrop)
+            if (silverSword)
             {
-                audioManager.Sword();
-                collision.gameObject.GetComponent<PlayerController>().GotSword();
-                PickUpKey(collision);
+                if (collision.gameObject.GetComponent<PlayerController>().gotGoldSword)
+                {
+                    Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), collision.gameObject.GetComponent<BoxCollider2D>());
+                    Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), collision.gameObject.GetComponent<CircleCollider2D>());
+                }
+
+                if (!collision.gameObject.GetComponent<PlayerController>().gotGoldSword)
+                {
+                    audioManager.Sword();
+                    collision.gameObject.GetComponent<PlayerController>().GotSilverSword();
+                    PickUpKey(collision);
+                }
+            }
+
+            if (goldSword)
+            {
+                if (collision.gameObject.GetComponent<PlayerController>().gotSilverSword)
+                {
+                    Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), collision.gameObject.GetComponent<BoxCollider2D>());
+                    Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), collision.gameObject.GetComponent<CircleCollider2D>());
+                }
+
+                if (!collision.gameObject.GetComponent<PlayerController>().gotSilverSword)
+                {
+                    audioManager.Sword();
+                    collision.gameObject.GetComponent<PlayerController>().GotGoldSword();
+                    PickUpKey(collision);
+                }
             }
 
             if (Input.GetKey(KeyCode.E))
@@ -63,13 +90,13 @@ public class Key : MonoBehaviour
         transform.parent = collision.transform;
         transform.position = new Vector2(collision.transform.position.x, collision.transform.position.y + 0.5f);
 
-        if (enemyDrop && transform.rotation.y >= 0f)
+        if (silverSword && transform.rotation.y >= 0f || goldSword && transform.rotation.y >= 0f)
         {
             transform.position = new Vector2(collision.transform.position.x + 0.25f, collision.transform.position.y + 0.05f);
             StartCoroutine(ParryControl());
         }
 
-        if (enemyDrop && transform.rotation.y < 0f)
+        if (silverSword && transform.rotation.y < 0f || goldSword && transform.rotation.y < 0f)
         {
             transform.position = new Vector2(collision.transform.position.x - 0.25f, collision.transform.position.y + 0.05f);
             StartCoroutine(ParryControl());
@@ -107,7 +134,7 @@ public class Key : MonoBehaviour
 
     public void DropSword()
     {
-        if (enemyDrop)
+        if (silverSword || goldSword)
         {
             gameObject.SetActive(true);
         }
@@ -122,7 +149,7 @@ public class Key : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (!bossKey && !enemyDrop)
+            if (!bossKey && !silverSword && !goldSword)
             {
                 promptText.SetActive(false);
             }            

@@ -18,7 +18,7 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
     private float coyoteTimeCounter;
     private float jumpBufferTime = 0.2f;
     private float jumpBufferTimeCounter;
-
+    public bool canJump = true;
     private ParticleSystem dust;
 
     private void Awake()
@@ -48,7 +48,7 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
                 coyoteTimeCounter -= Time.deltaTime;
             }
 
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && canJump)
             {
                 jumpBufferTimeCounter = jumpBufferTime;
             }
@@ -59,6 +59,7 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
 
             if (!Input.GetButton("Jump") && IsGrounded())
             {
+                canJump = true;
                 canDoubleJump = false;
             }
 
@@ -87,7 +88,7 @@ public class Rigidbody2DDoubleJump : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.22f, groundLayer);
     }
 
     private void CreateDust()

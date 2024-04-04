@@ -79,19 +79,34 @@ public class Boss : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player" && player.GetComponent<PlayerController>().gotSword && !player.GetComponent<PlayerController>().canParry)
+        if (collision.gameObject.tag == "Player" && player.GetComponent<PlayerController>().gotSilverSword && !player.GetComponent<PlayerController>().canParry)
         {
             audioManager.Dead();
-            player.GetComponent<PlayerController>().DropSword();
+            player.GetComponent<PlayerController>().DropSilverSword();
             player.gameObject.GetComponentInChildren<Key>().DropSword();
-            bossHealthBar.value -= 0.05f;
+            bossHealthBar.value -= 0.0625f;
             StartCoroutine(GotHit());
 
             if (bossHealthBar.value < 0.05f)
             {
-                audioManager.Background();
+                audioManager.Cave();
                 anim.SetBool("Defeat", true);
-                Debug.Log("Boss Defeated");
+                StartCoroutine(BossFightCompleted());
+            }
+        }
+
+        if (collision.gameObject.tag == "Player" && player.GetComponent<PlayerController>().gotGoldSword && !player.GetComponent<PlayerController>().canParry)
+        {
+            audioManager.Dead();
+            player.GetComponent<PlayerController>().DropGoldSword();
+            player.gameObject.GetComponentInChildren<Key>().DropSword();
+            bossHealthBar.value -= 0.125f;
+            StartCoroutine(GotHit());
+
+            if (bossHealthBar.value < 0.05f)
+            {
+                audioManager.Cave();
+                anim.SetBool("Defeat", true);
                 StartCoroutine(BossFightCompleted());
             }
         }
@@ -104,7 +119,6 @@ public class Boss : MonoBehaviour
         player.GetComponent<PlayerController>().isVulnerable = false;
         GameManager.Instance.EnableShield();
         bossDoor.BossAreaCleared();
-        skeletonWarrior.Dead();
         cameraController.respawnSkeleton = false;
         skeletonWarrior.Dead();
         yield return new WaitForSeconds(5f);

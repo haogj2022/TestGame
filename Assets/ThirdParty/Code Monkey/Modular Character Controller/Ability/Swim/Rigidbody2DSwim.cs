@@ -5,6 +5,7 @@ public class Rigidbody2DSwim : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private Animator swimControl;
+    public AudioManager audioManager;
 
     private float horizontalFloat;
     private float verticalFloat;
@@ -33,6 +34,11 @@ public class Rigidbody2DSwim : MonoBehaviour
             swimControl.SetBool("Left", true);
             StartCoroutine(SwimAbility());
         }
+
+        if (collision.tag == "WaterArea" && audioManager.music.clip != audioManager.waterMusic)
+        {
+            audioManager.Water();
+        }
     }
 
     IEnumerator SwimAbility()
@@ -46,7 +52,12 @@ public class Rigidbody2DSwim : MonoBehaviour
         if (collision.tag == "Water")
         {
             CreateDust();
-            anim.SetBool("Swim", true);
+            anim.SetBool("Swim", true);           
+        }
+
+        if (collision.tag == "WaterArea" && audioManager.music.clip != audioManager.waterMusic)
+        {
+            audioManager.Water();
         }
     }
 
@@ -65,6 +76,11 @@ public class Rigidbody2DSwim : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             }
+        }
+
+        if (collision.tag == "WaterArea" && audioManager.music.clip != audioManager.caveMusic)
+        {
+            audioManager.Cave();
         }
     }
 
@@ -91,7 +107,7 @@ public class Rigidbody2DSwim : MonoBehaviour
     IEnumerator WaterDash()
     {
         tr.emitting = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         tr.emitting = false;
         canDash = false;
         yield return new WaitForSeconds(1f);

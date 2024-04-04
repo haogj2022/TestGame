@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator gemCollected;
     [SerializeField] Animator keyCollected;
     [HideInInspector] public bool gotKey;
-    [HideInInspector] public bool gotSword;
+    [HideInInspector] public bool gotSilverSword;
+    [HideInInspector] public bool gotGoldSword;
     [HideInInspector] public bool isVulnerable = true;
     [HideInInspector] public bool canParry;
     public AudioManager audioManager;
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
             ActivateAbility();
         }
 
-        if (gotSword)
+        if (gotSilverSword || gotGoldSword)
         {
             sword = GetComponentInChildren<Key>();
 
@@ -61,13 +62,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Item" && Input.GetKey(KeyCode.E))
+        if (collision.gameObject.tag == "LedgeUp" || collision.gameObject.tag == "Item" && Input.GetKey(KeyCode.E))
         {
             ActivateAbility();
         }
 
         if (collision.gameObject.tag == "Gem")
         {
+            GameManager.Instance.numOfGems += 1;
             audioManager.Gem();
             collision.gameObject.SetActive(false);
             StartCoroutine(GemCollected());
@@ -101,7 +103,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Death")
+        if (collision.gameObject.tag == "Death" || collision.gameObject.tag == "LedgeUp")
         {
             CancelAbility();
         }
@@ -117,14 +119,24 @@ public class PlayerController : MonoBehaviour
         gotKey = false;
     }
 
-    public void GotSword()
+    public void GotSilverSword()
     {
-        gotSword = true;
+        gotSilverSword = true;
     }
 
-    public void DropSword()
+    public void DropSilverSword()
     {
-        gotSword = false;
+        gotSilverSword = false;
+    }
+
+    public void GotGoldSword()
+    {
+        gotGoldSword = true;
+    }
+
+    public void DropGoldSword()
+    {
+        gotGoldSword = false;
     }
 
     public void ActivateAbility()

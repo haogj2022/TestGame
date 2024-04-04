@@ -44,7 +44,7 @@ public class TransformForward : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (player.isVulnerable && !player.gotSword || player.gotSword && !player.canParry)
+            if (player.isVulnerable && !player.gotSilverSword && !player.gotGoldSword || player.gotSilverSword && !player.canParry || player.gotGoldSword && !player.canParry)
             {
                 if (player.gotKey)
                 {
@@ -52,9 +52,15 @@ public class TransformForward : MonoBehaviour
                     player.gameObject.GetComponentInChildren<Key>().DropKey();
                 }
 
-                if (player.gotSword)
+                if (player.gotSilverSword)
                 {
-                    player.DropSword();
+                    player.DropSilverSword();
+                    player.gameObject.GetComponentInChildren<Key>().DropSword();
+                }
+
+                if (player.gotGoldSword)
+                {
+                    player.DropGoldSword();
                     player.gameObject.GetComponentInChildren<Key>().DropSword();
                 }
 
@@ -62,7 +68,7 @@ public class TransformForward : MonoBehaviour
                 GameManager.Instance.RespawnPlayer(playerRespawn);
             }
 
-            if (player.gotSword && player.canParry)
+            if (player.gotSilverSword && player.canParry || player.gotGoldSword && player.canParry)
             {
                 Parry();
             }
@@ -71,6 +77,16 @@ public class TransformForward : MonoBehaviour
             {
                 Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), player.GetComponent<BoxCollider2D>());
             }
+        }
+
+        if (collision.gameObject.tag == "SkeletonWarrior")
+        {
+            collision.gameObject.GetComponent<EnemyHitBox>().Dead();
+        }
+
+        if (collision.gameObject.tag == "EnemyDrop" || collision.gameObject.tag == "MainBoss")
+        {
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), collision.gameObject.GetComponent<BoxCollider2D>());
         }
     }
 }

@@ -31,7 +31,9 @@ public class Rigidbody2DFly : MonoBehaviour
     IEnumerator FlyAbility()
     {
         StartCoroutine(TransformEffect());
-        yield return new WaitForSeconds(3f);        
+        rb2D.gravityScale = 0;
+        yield return new WaitForSeconds(3f);
+        rb2D.gravityScale = 1;
         batControl.SetBool("Left", false);
         anim.SetBool("Fly", false);
         StartCoroutine(TransformEffect());

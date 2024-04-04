@@ -159,7 +159,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2.5}
+  m_Size: {x: 1.5, y: 2}
   m_EdgeRadius: 0
 --- !u!61 &9186935273199349432
 BoxCollider2D:
@@ -185,7 +185,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 2.5}
+  m_Size: {x: 2.5, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &116078842492243533
 MonoBehaviour:
@@ -203,6 +203,9 @@ MonoBehaviour:
   bossHealthBar: {fileID: 0}
   horizontalMagicSlash: {fileID: 0}
   verticalMagicSlash: {fileID: 0}
+  bossDoor: {fileID: 0}
+  skeletonWarrior: {fileID: 0}
+  audioManager: {fileID: 0}
 --- !u!114 &2016400120809839498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +225,7 @@ MonoBehaviour:
   isBoss: 1
   canAttack: 0
   isAttacking: 0
+  skeletonWarrior: {fileID: 0}
 --- !u!96 &878635152797822664
 TrailRenderer:
   serializedVersion: 3

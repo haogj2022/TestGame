@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Rigidbody2DHorizontalMove : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
     private float horizontalFloat;
     private Rigidbody2D rb2D;
     public AudioManager audioManager;
+    public Slider dashBar;
 
     [HideInInspector] public bool canDash = true;
     private bool isDashing;
@@ -73,6 +75,8 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
         {
             if (!anim.GetBool("Tunnel") && !anim.GetBool("Fly") && !anim.GetBool("Crouch"))
             {
+                dashBar.value = dashBar.maxValue;
+                dashBar.gameObject.SetActive(true);
                 audioManager.Dash();
                 StartCoroutine(Dash());
             }          
@@ -93,8 +97,7 @@ public class Rigidbody2DHorizontalMove : MonoBehaviour
 
             Flip(true);
         }
-
-        if (horizontalFloat < 0f && isFacingRight)
+        else if (horizontalFloat < 0f && isFacingRight)
         {
             if (rb2D.velocity.y == 0f)
             {

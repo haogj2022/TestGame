@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     private PatrolCoroutines patrol;
     [HideInInspector] public bool isAttacking;
     private GameObject boss;
+    public EnemyHitBox skeletonWarrior;
 
     private void Start()
     {
@@ -37,12 +38,17 @@ public class EnemyController : MonoBehaviour
         {
             canAttack = true;
 
-            if (patrol != null && !keepMoving)
+            if (patrol != null && !keepMoving && gameObject.activeInHierarchy)
             {
                 StartCoroutine(StopPatrol());
             }
 
             anim.SetBool("Attack", true);
+        }
+
+        if (collision.tag == "SkeletonWarrior")
+        {
+            skeletonWarrior.Dead();
         }
     }
 
@@ -90,7 +96,7 @@ public class EnemyController : MonoBehaviour
 
     public void Attack()
     {
-        if (!player.isVulnerable || player.gotSword && player.canParry)
+        if (!player.isVulnerable || player.gotSilverSword && player.canParry || player.gotGoldSword && player.canParry)
         {
             anim.SetBool("Attack", false);
             canAttack = false;
@@ -108,9 +114,19 @@ public class EnemyController : MonoBehaviour
                 }
             }
 
-            if (player.gotSword)
+            if (player.gotSilverSword)
             {
-                player.DropSword();
+                player.DropSilverSword();
+
+                if (player.gameObject.GetComponentInChildren<Key>() != null)
+                {
+                    player.gameObject.GetComponentInChildren<Key>().DropSword();
+                }
+            }
+
+            if (player.gotGoldSword)
+            {
+                player.DropGoldSword();
 
                 if (player.gameObject.GetComponentInChildren<Key>() != null)
                 {

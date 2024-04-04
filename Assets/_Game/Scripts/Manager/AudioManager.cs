@@ -4,7 +4,8 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource music;
     public AudioSource sound;
-    public AudioClip bgMusic;
+    public AudioClip caveMusic;
+    public AudioClip waterMusic;
     public AudioClip bossMusic;
     public AudioClip jump;
     public AudioClip dead;
@@ -47,13 +48,22 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Background()
+    public void Cave()
     {
         if (canPlayMusic)
         {
-            music.clip = bgMusic;
+            music.clip = caveMusic;
             music.Play();
         }        
+    }
+
+    public void Water()
+    {
+        if (canPlayMusic)
+        {
+            music.clip = waterMusic;
+            music.Play();
+        }
     }
 
     public void Boss()

@@ -50,7 +50,10 @@ public class PatrolCoroutines : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            StartCoroutine(DetectCooldown());
+            if (gameObject.activeInHierarchy)
+            {
+                StartCoroutine(DetectCooldown());
+            }
         }
     }
 

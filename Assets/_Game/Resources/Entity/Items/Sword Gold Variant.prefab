@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6589737329264478351
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 123990973280976173, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: dropKey.x
+      value: 238.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 123990973280976173, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: dropKey.y
+      value: 55.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 123990973280976173, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: goldSword
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 123990973280976173, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: silverSword
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541325916901664974, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541325916901664974, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 238.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541325916901664974, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 55.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541325916901664974, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541325916901664974, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541325916901664974, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541325916901664974, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541325916901664974, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591436779794133743, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_Name
+      value: Sword Gold Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591436779794133743, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602102128176365809, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602102128176365809, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602102128176365809, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c5930074bea35fb49a069128d2c316fb,
+        type: 3}
+    - target: {fileID: 6602102128176365809, guid: 7ade77a8b5f192546b46940a17598fd4,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7ade77a8b5f192546b46940a17598fd4, type: 3}

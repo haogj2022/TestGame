@@ -101,7 +101,10 @@ MonoBehaviour:
   dropKey: {x: 0, y: 0, z: 0}
   promptText: {fileID: 0}
   bossKey: 0
-  enemyDrop: 1
+  silverSword: 1
+  goldSword: 0
+  parryControl: {fileID: 0}
+  audioManager: {fileID: 0}
 --- !u!61 &6246218284637066562
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -118,7 +121,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.25, y: 0.5}
     oldSize: {x: 2, y: 2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5

@@ -107,14 +107,24 @@ public class SpikeTrap : MonoBehaviour
                     }                    
                 }
 
-                if (player.gotSword)
+                if (player.gotSilverSword)
                 {
-                    player.DropSword();
+                    player.DropSilverSword();
 
                     if (player.gameObject.GetComponentInChildren<Key>() != null)
                     {
                         player.gameObject.GetComponentInChildren<Key>().DropSword();
                     }                    
+                }
+
+                if (player.gotGoldSword)
+                {
+                    player.DropGoldSword();
+
+                    if (player.gameObject.GetComponentInChildren<Key>() != null)
+                    {
+                        player.gameObject.GetComponentInChildren<Key>().DropSword();
+                    }
                 }
             }
         }
